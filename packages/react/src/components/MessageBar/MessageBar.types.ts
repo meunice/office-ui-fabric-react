@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { BaseButton, Button } from '../../Button';
+import { BaseButton, Button, IButtonProps } from '../../Button';
 import type { ITheme, IStyle } from '../../Styling';
 import type { IRefObject, IStyleFunctionOrObject } from '../../Utilities';
 import type { IIconProps } from '../../Icon';
+
+import type { JSXElement } from '@fluentui/utilities';
 
 /**
  * {@docCategory MessageBar}
@@ -28,7 +30,8 @@ export interface IMessageBarProps extends React.HTMLAttributes<HTMLElement>, Rea
   /**
    * The actions you want to show on the other side.
    */
-  actions?: JSX.Element;
+
+  actions?: JSXElement;
 
   /**
    * A description of the message bar for the benefit of screen readers.
@@ -41,7 +44,7 @@ export interface IMessageBarProps extends React.HTMLAttributes<HTMLElement>, Rea
    * If null, we don't show a dismiss button.
    * @defaultvalue null
    */
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   onDismiss?: (ev?: React.MouseEvent<HTMLElement | BaseButton | Button>) => any;
 
   /**
@@ -66,6 +69,7 @@ export interface IMessageBarProps extends React.HTMLAttributes<HTMLElement>, Rea
 
   /**
    * Aria label on overflow button if truncated is defined.
+   * @deprecated Use `expandButtonProps` instead.
    */
   overflowButtonAriaLabel?: string;
 
@@ -97,6 +101,17 @@ export interface IMessageBarProps extends React.HTMLAttributes<HTMLElement>, Rea
   messageBarIconProps?: IIconProps;
 
   /**
+   *  Button props that can be applied to the expand button of the MessageBar.
+   */
+  expandButtonProps?: IButtonProps;
+
+  /**
+   * Callback to execute when expand button is toggled
+   * @returns
+   */
+  onExpandButtonToggled?: (expandSingleLine: boolean) => void;
+
+  /**
    * Custom role to apply to the MessageBar.
    * @defaultvalue `alert` if `messageBarType` is `error`, `blocked`, or `severeWarning`;
    * or `status` otherwise
@@ -116,6 +131,13 @@ export interface IMessageBarProps extends React.HTMLAttributes<HTMLElement>, Rea
    * @default true
    */
   delayedRender?: boolean;
+
+  /**
+   * An optional override to show the expand/collapse icon. It will only be shown by default for
+   * single-line truncated MessageBars that do not have actions.
+   * @defaultvalue false
+   */
+  showExpandButton?: boolean;
 }
 
 /**

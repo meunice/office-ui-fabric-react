@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useConst, usePrevious } from '@fluentui/react-hooks';
+import { useConst, useIsomorphicLayoutEffect, usePrevious } from '@fluentui/react-hooks';
 import { mergeAriaAttributeValues } from '../../Utilities';
 import { KeytipManager, mergeOverflows, sequencesToID, getAriaDescribedBy } from '../../utilities/keytips/index';
 import type { KeytipDataOptions } from './KeytipData.types';
@@ -14,7 +14,7 @@ export interface IKeytipData {
  * Hook that creates attributes for components which are enabled with Keytip.
  */
 export function useKeytipData(options: KeytipDataOptions): IKeytipData {
-  const uniqueId = React.useRef<string>();
+  const uniqueId = React.useRef<string>(undefined);
   const keytipProps: IKeytipProps | undefined = options.keytipProps
     ? {
         disabled: options.disabled,
@@ -26,8 +26,7 @@ export function useKeytipData(options: KeytipDataOptions): IKeytipData {
   const prevOptions = usePrevious(options);
 
   // useLayoutEffect used to strictly emulate didUpdate/didMount behavior
-  // eslint-disable-next-line no-restricted-properties
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (
       uniqueId.current &&
       keytipProps &&
@@ -37,8 +36,7 @@ export function useKeytipData(options: KeytipDataOptions): IKeytipData {
     }
   });
 
-  // eslint-disable-next-line no-restricted-properties
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     // Register Keytip in KeytipManager
     if (keytipProps) {
       uniqueId.current = keytipManager.register(keytipProps);
@@ -53,7 +51,7 @@ export function useKeytipData(options: KeytipDataOptions): IKeytipData {
   }, []);
 
   let nativeKeytipProps: IKeytipData = {
-    ariaDescribedBy: undefined,
+    ariaDescribedBy: options.ariaDescribedBy,
     keytipId: undefined,
   };
 

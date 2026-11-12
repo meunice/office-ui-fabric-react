@@ -26,6 +26,8 @@ import type { IOverflowSet } from '../../OverflowSet';
 import type { IResizeGroup } from '../../ResizeGroup';
 import type { IButtonProps } from '../../Button';
 
+import type { JSXElement } from '@fluentui/utilities';
+
 const getClassNames = classNamesFunction<ICommandBarStyleProps, ICommandBarStyles>();
 
 export interface ICommandBarData {
@@ -67,7 +69,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
     initializeComponentRef(this);
   }
 
-  public render(): JSX.Element {
+  public render(): JSXElement {
     const {
       items,
       overflowItems,
@@ -88,6 +90,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
       cacheKey: this._computeCacheKey({
         primaryItems: [...items],
         overflow: overflowItems && overflowItems.length > 0,
+        farItems,
       }),
     };
 
@@ -120,7 +123,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
     this._resizeGroup.current && this._resizeGroup.current.remeasure();
   }
 
-  private _onRenderData = (data: ICommandBarData): JSX.Element => {
+  private _onRenderData = (data: ICommandBarData): JSXElement => {
     const { ariaLabel, primaryGroupAriaLabel, farItemsGroupAriaLabel } = this.props;
     const hasSecondSet = data.farItems && data.farItems.length > 0;
 
@@ -158,14 +161,14 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
     );
   };
 
-  private _onRenderItem = (item: ICommandBarItemProps): JSX.Element | React.ReactNode => {
+  private _onRenderItem = (item: ICommandBarItemProps): JSXElement | React.ReactNode => {
     if (item.onRender) {
       // These are the top level items, there is no relevant menu dismissing function to
       // provide for the IContextualMenuItem onRender function. Pass in a no op function instead.
       return item.onRender(item, () => undefined);
     }
 
-    // eslint-disable-next-line deprecation/deprecation
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     const itemText = item.text || item.name;
     const commandButtonProps: ICommandBarItemProps = {
       allowDisabledFocus: true,
@@ -180,7 +183,13 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
 
     if (item.iconOnly && (itemText !== undefined || item.tooltipHostProps)) {
       return (
-        <TooltipHost role="none" content={itemText} setAriaDescribedBy={false} {...item.tooltipHostProps}>
+        <TooltipHost
+          role="none"
+          content={itemText}
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
+          setAriaDescribedBy={false}
+          {...item.tooltipHostProps}
+        >
           {this._commandButton(item, commandButtonProps)}
         </TooltipHost>
       );
@@ -189,10 +198,10 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
     return this._commandButton(item, commandButtonProps);
   };
 
-  private _commandButton = (item: ICommandBarItemProps, props: ICommandBarItemProps): JSX.Element => {
+  private _commandButton = (item: ICommandBarItemProps, props: ICommandBarItemProps): JSXElement => {
     const ButtonAs = this.props.buttonAs as IComponentAs<ICommandBarItemProps> | undefined;
     const CommandBarButtonAs = item.commandBarButtonAs as IComponentAs<ICommandBarItemProps> | undefined;
-    const DefaultButtonAs = (CommandBarButton as {}) as IComponentAs<ICommandBarItemProps>;
+    const DefaultButtonAs = CommandBarButton as {} as IComponentAs<ICommandBarItemProps>;
 
     // The prop types between these three possible implementations overlap enough that a force-cast is safe.
     let Type = DefaultButtonAs;
@@ -212,7 +221,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
   private _onButtonClick(item: ICommandBarItemProps): (ev: React.MouseEvent<HTMLButtonElement>) => void {
     return ev => {
       // inactive is deprecated. remove check in 7.0
-      // eslint-disable-next-line deprecation/deprecation
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       if (item.inactive) {
         return;
       }
@@ -222,7 +231,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
     };
   }
 
-  private _onRenderOverflowButton = (overflowItems: ICommandBarItemProps[]): JSX.Element => {
+  private _onRenderOverflowButton = (overflowItems: ICommandBarItemProps[]): JSXElement => {
     const {
       overflowButtonProps = {}, // assure that props is not empty
     } = this.props;
@@ -248,8 +257,12 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
     return <OverflowButtonType {...(overflowProps as IButtonProps)} />;
   };
 
-  private _computeCacheKey(data: { primaryItems?: ICommandBarItemProps[]; overflow?: boolean }): string {
-    const { primaryItems, overflow } = data;
+  private _computeCacheKey(data: {
+    primaryItems?: ICommandBarItemProps[];
+    overflow?: boolean;
+    farItems?: ICommandBarItemProps[];
+  }): string {
+    const { primaryItems, overflow, farItems } = data;
     const returnKey = (acc: string, current: ICommandBarItemProps): string => {
       const { cacheKey = current.key } = current;
       return acc + cacheKey;
@@ -257,13 +270,15 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
 
     const primaryKey = primaryItems && primaryItems.reduce(returnKey, '');
     const overflowKey = overflow ? 'overflow' : '';
+    const farKey = farItems && farItems.reduce(returnKey, '');
 
-    return [primaryKey, overflowKey].join('');
+    return [primaryKey, overflowKey, farKey].join('');
   }
 
   private _onReduceData = (data: ICommandBarData): ICommandBarData | undefined => {
     const { shiftOnReduce, onDataReduced } = this.props;
     let { primaryItems, overflowItems, cacheKey } = data;
+    const { farItems } = data;
 
     // Use first item if shiftOnReduce, otherwise use last item
     const movedItem = primaryItems[shiftOnReduce ? 0 : primaryItems.length - 1];
@@ -275,7 +290,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
       primaryItems = shiftOnReduce ? primaryItems.slice(1) : primaryItems.slice(0, -1);
 
       const newData = { ...data, primaryItems, overflowItems };
-      cacheKey = this._computeCacheKey({ primaryItems, overflow: overflowItems.length > 0 });
+      cacheKey = this._computeCacheKey({ primaryItems, overflow: overflowItems.length > 0, farItems });
 
       if (onDataReduced) {
         onDataReduced(movedItem);
@@ -292,6 +307,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
     const { shiftOnReduce, onDataGrown } = this.props;
     const { minimumOverflowItems } = data;
     let { primaryItems, overflowItems, cacheKey } = data;
+    const { farItems } = data;
     const movedItem = overflowItems[0];
 
     // Make sure that moved item exists and is not one of the original overflow items
@@ -303,7 +319,7 @@ export class CommandBarBase extends React.Component<ICommandBarProps, {}> implem
       primaryItems = shiftOnReduce ? [movedItem, ...primaryItems] : [...primaryItems, movedItem];
 
       const newData = { ...data, primaryItems, overflowItems };
-      cacheKey = this._computeCacheKey({ primaryItems, overflow: overflowItems.length > 0 });
+      cacheKey = this._computeCacheKey({ primaryItems, overflow: overflowItems.length > 0, farItems });
 
       if (onDataGrown) {
         onDataGrown(movedItem);

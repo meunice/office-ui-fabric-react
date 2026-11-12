@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SearchBox renders SearchBox correctly 1`] = `
 <div
-  className=
+  class=
       ms-SearchBox
       {
         -moz-osx-font-smoothing: grayscale;
@@ -30,23 +30,22 @@ exports[`SearchBox renders SearchBox correctly 1`] = `
         padding-right: 0;
         padding-top: 1px;
       }
-      @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+      @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
         border-color: WindowText;
       }
       &:hover {
         border-color: #323130;
       }
-      @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+      @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
         border-color: Highlight;
       }
       &:hover .ms-SearchBox-iconContainer {
         color: #005a9e;
       }
-  onFocusCapture={[Function]}
 >
   <div
-    aria-hidden={true}
-    className=
+    aria-hidden="true"
+    class=
         ms-SearchBox-iconContainer
         {
           color: #0078d4;
@@ -60,11 +59,10 @@ exports[`SearchBox renders SearchBox correctly 1`] = `
           transition: width 0.167s;
           width: 32px;
         }
-    onClick={[Function]}
   >
     <i
-      aria-hidden={true}
-      className=
+      aria-hidden="true"
+      class=
           ms-SearchBox-icon
           {
             -moz-osx-font-smoothing: grayscale;
@@ -75,6 +73,7 @@ exports[`SearchBox renders SearchBox correctly 1`] = `
             font-weight: normal;
             opacity: 1;
             speak: none;
+            text-decoration: inherit;
             transition: opacity 0.167s 0s;
           }
       data-icon-name="Search"
@@ -83,7 +82,7 @@ exports[`SearchBox renders SearchBox correctly 1`] = `
     </i>
   </div>
   <input
-    className=
+    class=
         ms-SearchBox-field
         {
           background-color: transparent;
@@ -124,10 +123,6 @@ exports[`SearchBox renders SearchBox correctly 1`] = `
           display: none;
         }
     id="SearchBox0"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onInput={[Function]}
-    onKeyDown={[Function]}
     role="searchbox"
     value=""
   />
@@ -136,7 +131,7 @@ exports[`SearchBox renders SearchBox correctly 1`] = `
 
 exports[`SearchBox renders SearchBox without animation correctly 1`] = `
 <div
-  className=
+  class=
       ms-SearchBox
       {
         -moz-osx-font-smoothing: grayscale;
@@ -164,23 +159,22 @@ exports[`SearchBox renders SearchBox without animation correctly 1`] = `
         padding-right: 0;
         padding-top: 1px;
       }
-      @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+      @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
         border-color: WindowText;
       }
       &:hover {
         border-color: #323130;
       }
-      @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+      @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
         border-color: Highlight;
       }
       &:hover .ms-SearchBox-iconContainer {
         color: #005a9e;
       }
-  onFocusCapture={[Function]}
 >
   <div
-    aria-hidden={true}
-    className=
+    aria-hidden="true"
+    class=
         ms-SearchBox-iconContainer
         {
           color: #0078d4;
@@ -193,11 +187,10 @@ exports[`SearchBox renders SearchBox without animation correctly 1`] = `
           text-align: center;
           width: 32px;
         }
-    onClick={[Function]}
   >
     <i
-      aria-hidden={true}
-      className=
+      aria-hidden="true"
+      class=
           ms-SearchBox-icon
           {
             -moz-osx-font-smoothing: grayscale;
@@ -208,6 +201,7 @@ exports[`SearchBox renders SearchBox without animation correctly 1`] = `
             font-weight: normal;
             opacity: 1;
             speak: none;
+            text-decoration: inherit;
           }
       data-icon-name="Search"
     >
@@ -215,7 +209,7 @@ exports[`SearchBox renders SearchBox without animation correctly 1`] = `
     </i>
   </div>
   <input
-    className=
+    class=
         ms-SearchBox-field
         {
           background-color: transparent;
@@ -256,10 +250,6 @@ exports[`SearchBox renders SearchBox without animation correctly 1`] = `
           display: none;
         }
     id="SearchBox0"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onInput={[Function]}
-    onKeyDown={[Function]}
     role="searchbox"
     value=""
   />

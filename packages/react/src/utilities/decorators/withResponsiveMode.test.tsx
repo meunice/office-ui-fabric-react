@@ -1,23 +1,19 @@
 import * as React from 'react';
-import * as ReactTestUtils from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
 import { setResponsiveMode, withResponsiveMode, ResponsiveMode } from './withResponsiveMode';
-import { setSSR } from '../../Utilities';
 
-// eslint-disable-next-line deprecation/deprecation
+import type { JSXElement } from '@fluentui/utilities';
+
 @withResponsiveMode
 class Example extends React.Component<any, any> {
-  public render(): JSX.Element {
+  public render(): JSXElement {
     return <div />;
   }
 }
 
 describe('withResponsiveMode', () => {
   it('can be used in a server scenario', () => {
-    setSSR(true);
-
     setResponsiveMode(ResponsiveMode.large);
-    expect(() => ReactTestUtils.renderIntoDocument(<Example />)).toBeTruthy();
-
-    setSSR(false);
+    expect(() => render(<Example />)).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { IChartProps, ILineChartPoints, ILineChartProps, LineChart } from '@fluentui/react-charting';
-import { DefaultPalette } from '@fluentui/react/lib/Styling';
+import { IChartProps, ILineChartPoints, ILineChartProps, LineChart, DataVizPalette } from '@fluentui/react-charting';
 import { Toggle } from '@fluentui/react/lib/Toggle';
+import type { JSXElement } from '@fluentui/utilities';
 
 interface ILineChartMultipleExampleState {
   width: number;
@@ -19,13 +19,29 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
     };
   }
 
-  public render(): JSX.Element {
+  public render(): JSXElement {
     return (
-      <>
-        <label>change Width:</label>
-        <input type="range" value={this.state.width} min={200} max={1000} onChange={this._onWidthChange} />
-        <label>change Height:</label>
-        <input type="range" value={this.state.height} min={200} max={1000} onChange={this._onHeightChange} />
+      <div className="containerDiv">
+        <label htmlFor="changeWidth_Multiple">Change Width:</label>
+        <input
+          type="range"
+          value={this.state.width}
+          min={200}
+          max={1000}
+          id="changeWidth_Multiple"
+          onChange={this._onWidthChange}
+          aria-valuetext={`ChangeWidthSlider${this.state.width}`}
+        />
+        <label htmlFor="changeHeight_Multiple">Change Height:</label>
+        <input
+          type="range"
+          value={this.state.height}
+          min={200}
+          max={1000}
+          id="changeHeight_Multiple"
+          onChange={this._onHeightChange}
+          aria-valuetext={`ChangeHeightslider${this.state.height}`}
+        />
         <Toggle
           label="Enabled  multiple shapes for each line"
           onText="On"
@@ -34,7 +50,7 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           checked={this.state.allowMultipleShapes}
         />
         <div>{this._styledExample()}</div>
-      </>
+      </div>
     );
   }
 
@@ -48,19 +64,21 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
     }
   };
 
-  private _styledExample(): JSX.Element {
+  private _styledExample(): JSXElement {
     const points: ILineChartPoints[] = [
       {
         data: [
           { x: new Date('2018/01/01'), y: 10, xAxisCalloutData: '2018/01/01', yAxisCalloutData: '10%' },
-          { x: new Date('2018/02/01'), y: 30, xAxisCalloutData: '2018/01/15', yAxisCalloutData: '18%' },
-          { x: new Date('2018/03/01'), y: 10, xAxisCalloutData: '2018/01/28', yAxisCalloutData: '24%' },
-          { x: new Date('2018/04/01'), y: 30, xAxisCalloutData: '2018/02/01', yAxisCalloutData: '25%' },
-          { x: new Date('2018/05/01'), y: 10, xAxisCalloutData: '2018/03/01', yAxisCalloutData: '15%' },
-          { x: new Date('2018/06/01'), y: 30, xAxisCalloutData: '2018/03/15', yAxisCalloutData: '30%' },
+          { x: new Date('2018/02/01'), y: 30, xAxisCalloutData: '2018/02/01', yAxisCalloutData: '18%' },
+          { x: new Date('2018/03/01'), y: 10, xAxisCalloutData: '2018/03/01', yAxisCalloutData: '24%' },
+          { x: new Date('2018/04/01'), y: 30, xAxisCalloutData: '2018/04/01', yAxisCalloutData: '25%' },
+          { x: new Date('2018/05/01'), y: 10, xAxisCalloutData: '2018/05/01', yAxisCalloutData: '15%' },
+          { x: new Date('2018/06/01'), y: 30, xAxisCalloutData: '2018/06/01', yAxisCalloutData: '30%' },
         ],
         legend: 'First',
-        color: DefaultPalette.blue,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -73,7 +91,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 50 },
         ],
         legend: 'Second',
-        color: DefaultPalette.green,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -86,7 +106,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 70 },
         ],
         legend: 'Third',
-        color: DefaultPalette.red,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -99,7 +121,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 90 },
         ],
         legend: 'Fourth',
-        color: DefaultPalette.black,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -112,7 +136,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 110 },
         ],
         legend: 'Fifth',
-        color: DefaultPalette.magentaDark,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -125,7 +151,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 130 },
         ],
         legend: 'Sixth',
-        color: DefaultPalette.purple,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -138,7 +166,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 150 },
         ],
         legend: 'Seventh',
-        color: DefaultPalette.yellow,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -151,7 +181,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 170 },
         ],
         legend: 'Eight',
-        color: DefaultPalette.teal,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -164,7 +196,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 190 },
         ],
         legend: 'Ninth',
-        color: 'cyan',
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -177,7 +211,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 210 },
         ],
         legend: 'Tenth',
-        color: DefaultPalette.orangeLighter,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -190,7 +226,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 230 },
         ],
         legend: 'Eleventh',
-        color: 'magenta',
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
       {
@@ -203,7 +241,9 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           { x: new Date('2018/06/01'), y: 250 },
         ],
         legend: 'Tweleth',
-        color: DefaultPalette.redDark,
+        lineOptions: {
+          lineBorderWidth: '4',
+        },
         onLegendClick: this._onLegendClickHandler,
       },
     ];
@@ -228,7 +268,7 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
     const colorFillBarData = [
       {
         legend: 'Time range 1',
-        color: 'blue',
+        color: DataVizPalette.color19,
         data: [
           {
             startX: new Date('2018/01/06'),
@@ -238,7 +278,7 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
       },
       {
         legend: 'Time range 2',
-        color: 'red',
+        color: DataVizPalette.color20,
         data: [
           {
             startX: new Date('2018/01/18'),
@@ -264,6 +304,8 @@ export class LineChartMultipleExample extends React.Component<{}, ILineChartMult
           legendProps={{ canSelectMultipleLegends: true, allowFocusOnLegends: true }}
           colorFillBars={colorFillBarData}
           allowMultipleShapesForPoints={this.state.allowMultipleShapes}
+          enablePerfOptimization={true}
+          useUTC={false}
         />
       </div>
     );

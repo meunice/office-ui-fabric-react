@@ -1,27 +1,18 @@
 {
-  "name": "ssr-tests",
+  "name": "@fluentui/ssr-tests",
   "version": "1.0.0",
   "description": "Server-side rendering tests for @fluentui/react.",
   "private": true,
   "scripts": {
-    "build": "just-scripts build",
-    "bundle": "just-scripts bundle",
-    "test": "just-scripts test",
-    "code-style": "node -v",
-    "clean": "",
-    "just": "just-scripts"
+    "type-check": "yarn run -T tsc -p . --noEmit --baseUrl .",
+    "bundle": "yarn run -T just-scripts bundle",
+    "test-ssr": "yarn run -T just-scripts test"
   },
   "license": "MIT",
   "devDependencies": {
-    "@fluentui/react": "^8.43.0",
     "@microsoft/load-themed-styles": "^1.10.26",
-    "@types/mocha": "^7.0.2",
-    "@fluentui/scripts": "^1.0.0",
-    "@fluentui/public-docsite-resources": "^8.1.41",
-    "just-scripts-utils": "^1.1.1",
-    "mocha": "^7.1.2",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "@types/mocha": "10.0.10",
+    "mocha": "11.2.2"
   },
   "dependencies": {
     "tslib": "^2.1.0"

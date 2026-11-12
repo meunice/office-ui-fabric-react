@@ -2,6 +2,8 @@ import * as React from 'react';
 import type { IStyle, ITheme } from '../../Styling';
 import type { IRefObject, IStyleFunctionOrObject } from '../../Utilities';
 
+import type { JSXElement } from '@fluentui/utilities';
+
 export interface IButtonGrid {}
 
 export interface IButtonGridProps
@@ -25,7 +27,8 @@ export interface IButtonGridProps
   /**
    * Custom renderer for the individual items
    */
-  onRenderItem: (item: any, index: number) => JSX.Element;
+
+  onRenderItem: (item: any, index: number) => JSXElement;
 
   /**
    * Whether focus should cycle back to the beginning once the user navigates past the end (and vice versa).
@@ -50,6 +53,15 @@ export interface IButtonGridProps
    * Handler for when focus leaves the ButtonGrid.
    */
   onBlur?: () => void;
+
+  /**
+   * If true, uses radiogroup semantics for the ButtonGrid.
+   * This should be set to true for single-row grids, for two reasons:
+   *   1. Radios are a more simple and understandable control,
+   *      and a better fit for a single-dimensional selection control
+   *   2. Multiple browsers use heuristics to strip table and grid roles from single-row tables with no column headers.
+   */
+  isSemanticRadio?: boolean;
 
   /**
    * Position this ButtonGrid is in the parent set (index in a parent menu, for example)

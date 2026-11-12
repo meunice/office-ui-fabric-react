@@ -1,17 +1,13 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as renderer from 'react-test-renderer';
-import { ReactWrapper } from 'enzyme';
-import { safeMount } from '@fluentui/test-utilities';
+import { render, fireEvent, act } from '@testing-library/react';
+
 import { EventGroup, KeyCodes, resetIds } from '../../Utilities';
-import { SelectionMode, Selection, SelectionZone } from '../../Selection';
+import { SelectionMode, Selection } from '../../Selection';
 import { getTheme } from '../../Styling';
 import { DetailsHeader } from './DetailsHeader';
 import { DetailsList } from './DetailsList';
 import { DetailsListBase } from './DetailsList.base';
 import { CheckboxVisibility, DetailsListLayoutMode } from './DetailsList.types';
-import { DetailsRow } from './DetailsRow';
-import { DetailsRowCheck } from './DetailsRowCheck';
 import type { IDragDropEvents } from '../../DragDrop';
 import type { IGroup } from '../../GroupedList';
 import type { IRenderFunction } from '../../Utilities';
@@ -19,6 +15,8 @@ import type { IDetailsColumnProps } from './DetailsColumn';
 import type { IDetailsHeaderProps } from './DetailsHeader';
 import type { IColumn, IDetailsGroupDividerProps, IDetailsList } from './DetailsList.types';
 import type { IDetailsRowProps } from './DetailsRow';
+
+import type { JSXElement } from '@fluentui/utilities';
 
 // Populate mock data for testing
 function mockData(count: number, isColumn: boolean = false, customDivider: boolean = false): any {
@@ -48,7 +46,8 @@ function mockData(count: number, isColumn: boolean = false, customDivider: boole
 // Wrapper function which calls the defaultRenderer with the corresponding params
 function columnDividerWrapper(
   iDetailsColumnProps: IDetailsColumnProps,
-  defaultRenderer: (props?: IDetailsColumnProps) => JSX.Element | null,
+
+  defaultRenderer: (props?: IDetailsColumnProps) => JSXElement | null,
 ): any {
   return defaultRenderer(iDetailsColumnProps);
 }
@@ -56,7 +55,8 @@ function columnDividerWrapper(
 // Using a bar sign as a custom divider along with the default divider
 function customColumnDivider(
   iDetailsColumnProps: IDetailsColumnProps,
-  defaultRenderer: (props?: IDetailsColumnProps) => JSX.Element | null,
+
+  defaultRenderer: (props?: IDetailsColumnProps) => JSXElement | null,
 ): any {
   return (
     <React.Fragment key={`divider_${iDetailsColumnProps.columnIndex}`}>
@@ -67,12 +67,38 @@ function customColumnDivider(
 }
 
 describe('DetailsList', () => {
+  let spy: jest.Spied<typeof window.scrollTo>;
   beforeEach(() => {
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+    spy = jest.spyOn(window, 'scrollTo').mockImplementation(() => {});
     resetIds();
   });
 
+  afterAll(() => {
+    spy.mockRestore();
+  });
+
+  afterEach(() => {
+    if ((setTimeout as unknown as jest.Mock).mock) {
+      jest.runOnlyPendingTimers();
+      jest.useRealTimers();
+    }
+  });
+
+  it('renders List correctly', () => {
+    const { container } = render(
+      <DetailsList
+        items={mockData(5)}
+        onRenderRow={() => null}
+        skipViewportMeasures={true}
+        onShouldVirtualize={() => false}
+      />,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
   it('renders List correctly with onRenderDivider props', () => {
-    const component = renderer.create(
+    const { container } = render(
       <DetailsList
         items={mockData(5)}
         columns={mockData(5, true)}
@@ -81,12 +107,11 @@ describe('DetailsList', () => {
         onShouldVirtualize={() => false}
       />,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders List with custom icon as column divider', () => {
-    const component = renderer.create(
+    const { container } = render(
       <DetailsList
         items={mockData(5)}
         columns={mockData(5, true, true)}
@@ -95,25 +120,11 @@ describe('DetailsList', () => {
         onShouldVirtualize={() => false}
       />,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('renders List correctly', () => {
-    const component = renderer.create(
-      <DetailsList
-        items={mockData(5)}
-        onRenderRow={() => null}
-        skipViewportMeasures={true}
-        onShouldVirtualize={() => false}
-      />,
-    );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders List in fixed constrained layout correctly', () => {
-    const component = renderer.create(
+    const { container } = render(
       <DetailsList
         items={mockData(5)}
         onRenderRow={() => null}
@@ -122,15 +133,15 @@ describe('DetailsList', () => {
         onShouldVirtualize={() => false}
       />,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders a single proportional column with correct width', () => {
     jest.useFakeTimers();
 
-    let component: IDetailsList | null;
-    safeMount(
+    let component: IDetailsList | null = null;
+
+    render(
       <DetailsList
         className="list"
         items={[{ key: 'item1' }, { key: 'item2' }, { key: 'item3' }]}
@@ -145,47 +156,46 @@ describe('DetailsList', () => {
         skipViewportMeasures={false}
         onShouldVirtualize={() => false}
       />,
-      () => {
-        expect(component).toBeTruthy();
-        component!.focusIndex(2);
-        setTimeout(() => {
-          const elements = (document.activeElement as HTMLElement).querySelectorAll('div[aria-colindex]');
-          elements.forEach((element: Element) => {
-            const itemKey = element.getAttribute('aria-colindex')!;
-            expect(itemKey).toBeDefined();
-
-            if (itemKey === '1') {
-              return;
-            }
-
-            const style = element.getAttribute('style')!;
-            expect(style).toBeDefined();
-
-            const width = style.match(/(?<=width: )\d+/g)!;
-            expect(width).toBeDefined();
-            expect(width[0]).toBeDefined();
-
-            if (itemKey === '2') {
-              expect(width[0]).toBe('121');
-            } else if (itemKey === '3') {
-              expect(width[0]).toBe('348');
-            } else if (itemKey === '4') {
-              expect(width[0]).toBe('123');
-            } else {
-              fail('Unexpected itemKey.');
-            }
-          });
-        }, 0);
-        jest.runOnlyPendingTimers();
-      },
     );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      component!.focusIndex(2);
+      jest.runAllTimers();
+    });
+
+    const elements = (document.activeElement as HTMLElement).querySelectorAll('div[role=columnheader]');
+    elements.forEach((element: Element, index: number) => {
+      if (index === 0) {
+        return;
+      }
+
+      const style = element.getAttribute('style')!;
+      expect(style).toBeDefined();
+
+      const width = style.match(/(?<=width: )\d+/g)!;
+      expect(width).toBeDefined();
+      expect(width[0]).toBeDefined();
+
+      if (index === 1) {
+        expect(width[0]).toBe('121');
+      } else if (index === 2) {
+        expect(width[0]).toBe('348');
+      } else if (index === 3) {
+        expect(width[0]).toBe('123');
+      } else {
+        fail('Unexpected index.');
+      }
+    });
   });
 
   it('renders proportional columns with proper width ratios', () => {
     jest.useFakeTimers();
 
-    let component: IDetailsList | null;
-    safeMount(
+    let component: IDetailsList | null = null;
+
+    render(
       <DetailsList
         className="list"
         items={[{ key: 'item1' }, { key: 'item2' }, { key: 'item3' }]}
@@ -199,45 +209,44 @@ describe('DetailsList', () => {
         skipViewportMeasures={false}
         onShouldVirtualize={() => false}
       />,
-      () => {
-        expect(component).toBeTruthy();
-        component!.focusIndex(2);
-        setTimeout(() => {
-          const elements = (document.activeElement as HTMLElement).querySelectorAll('div[aria-colindex]');
-          elements.forEach((element: Element) => {
-            const itemKey = element.getAttribute('aria-colindex')!;
-            expect(itemKey).toBeDefined();
-
-            if (itemKey === '1') {
-              return;
-            }
-
-            const style = element.getAttribute('style')!;
-            expect(style).toBeDefined();
-
-            const width = style.match(/(?<=width: )\d+/g)!;
-            expect(width).toBeDefined();
-            expect(width[0]).toBeDefined();
-
-            if (itemKey === '2') {
-              expect(width[0]).toBe('336');
-            } else if (itemKey === '3') {
-              expect(width[0]).toBe('255');
-            } else {
-              fail('Unexpected itemKey.');
-            }
-          });
-        }, 0);
-        jest.runOnlyPendingTimers();
-      },
     );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      component!.focusIndex(2);
+      jest.runAllTimers();
+    });
+
+    const elements = (document.activeElement as HTMLElement).querySelectorAll('div[role=columnheader]');
+    elements.forEach((element: Element, index: number) => {
+      if (index === 0) {
+        return;
+      }
+
+      const style = element.getAttribute('style')!;
+      expect(style).toBeDefined();
+
+      const width = style.match(/(?<=width: )\d+/g)!;
+      expect(width).toBeDefined();
+      expect(width[0]).toBeDefined();
+
+      if (index === 1) {
+        expect(width[0]).toBe('336');
+      } else if (index === 2) {
+        expect(width[0]).toBe('255');
+      } else {
+        fail('Unexpected index.');
+      }
+    });
   });
 
   it('renders proportional columns with proper width ratios when delayFirstMeasure', () => {
     jest.useFakeTimers();
 
-    let component: IDetailsList | null;
-    safeMount(
+    let component: IDetailsList | null = null;
+
+    render(
       <DetailsList
         className="list"
         items={[{ key: 'item1' }, { key: 'item2' }, { key: 'item3' }]}
@@ -252,42 +261,40 @@ describe('DetailsList', () => {
         onShouldVirtualize={() => false}
         delayFirstMeasure
       />,
-      () => {
-        expect(component).toBeTruthy();
-        component!.focusIndex(2);
-        setTimeout(() => {
-          const elements = (document.activeElement as HTMLElement).querySelectorAll('div[aria-colindex]');
-          elements.forEach((element: Element) => {
-            const itemKey = element.getAttribute('aria-colindex')!;
-            expect(itemKey).toBeDefined();
-
-            if (itemKey === '1') {
-              return;
-            }
-
-            const style = element.getAttribute('style')!;
-            expect(style).toBeDefined();
-
-            const width = style.match(/(?<=width: )\d+/g)!;
-            expect(width).toBeDefined();
-            expect(width[0]).toBeDefined();
-
-            if (itemKey === '2') {
-              expect(width[0]).toBe('336');
-            } else if (itemKey === '3') {
-              expect(width[0]).toBe('255');
-            } else {
-              fail('Unexpected itemKey.');
-            }
-          });
-        }, 0);
-        jest.runOnlyPendingTimers();
-      },
     );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      component!.focusIndex(2);
+      jest.runAllTimers();
+    });
+
+    const elements = (document.activeElement as HTMLElement).querySelectorAll('div[role=columnheader]');
+    elements.forEach((element: Element, index: number) => {
+      if (index === 0) {
+        return;
+      }
+
+      const style = element.getAttribute('style')!;
+      expect(style).toBeDefined();
+
+      const width = style.match(/(?<=width: )\d+/g)!;
+      expect(width).toBeDefined();
+      expect(width[0]).toBeDefined();
+
+      if (index === 1) {
+        expect(width[0]).toBe('336');
+      } else if (index === 2) {
+        expect(width[0]).toBe('255');
+      } else {
+        fail('Unexpected index.');
+      }
+    });
   });
 
   it('renders List in compact mode correctly', () => {
-    const component = renderer.create(
+    const { container } = render(
       <DetailsList
         items={mockData(5)}
         onRenderRow={() => null}
@@ -296,12 +303,11 @@ describe('DetailsList', () => {
         onShouldVirtualize={() => false}
       />,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders List with hidden checkboxes correctly', () => {
-    const component = renderer.create(
+    const { container } = render(
       <DetailsList
         items={mockData(5)}
         skipViewportMeasures={true}
@@ -323,85 +329,230 @@ describe('DetailsList', () => {
         checkboxVisibility={CheckboxVisibility.hidden}
       />,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('focuses row by index', () => {
     jest.useFakeTimers();
 
-    let component: IDetailsList | null;
-    safeMount(
+    let component: IDetailsList | null = null;
+
+    render(
       <DetailsList
         items={mockData(5)}
         componentRef={ref => (component = ref)}
         skipViewportMeasures={true}
         onShouldVirtualize={() => false}
       />,
-      () => {
-        expect(component).toBeTruthy();
-        component!.focusIndex(2);
-        setTimeout(() => {
-          expect(
-            (document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent,
-          ).toEqual('2');
-          expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
-        }, 0);
-        jest.runOnlyPendingTimers();
-      },
     );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      component!.focusIndex(2);
+      jest.runAllTimers();
+    });
+
+    expect(
+      (document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent,
+    ).toEqual('2');
+    expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
+  });
+
+  it('focuses row by arrow key', () => {
+    jest.useFakeTimers();
+
+    let component: IDetailsList | null = null;
+    const onSelectionChanged = jest.fn();
+    const selection = new Selection({
+      onSelectionChanged,
+    });
+
+    const { container } = render(
+      <DetailsList
+        componentRef={ref => (component = ref)}
+        items={mockData(5)}
+        selection={selection}
+        skipViewportMeasures={true}
+        onShouldVirtualize={() => false}
+      />,
+    );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      component!.focusIndex(0);
+      jest.runAllTimers();
+    });
+
+    onSelectionChanged.mockClear();
+
+    act(() => {
+      const headerWrapper = container.querySelector('.ms-DetailsList-headerWrapper');
+      fireEvent.keyDown(headerWrapper!, { which: KeyCodes.down, keyCode: KeyCodes.down });
+    });
+
+    expect(onSelectionChanged).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not focus by arrow key when isSelectedOnFocus is `false`', () => {
+    jest.useFakeTimers();
+
+    let component: IDetailsList | null = null;
+    const onSelectionChanged = jest.fn();
+    const selection = new Selection({
+      onSelectionChanged,
+    });
+
+    const { container } = render(
+      <DetailsList
+        componentRef={ref => (component = ref)}
+        items={mockData(5)}
+        selection={selection}
+        skipViewportMeasures={true}
+        onShouldVirtualize={() => false}
+        isSelectedOnFocus={false}
+      />,
+    );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      component!.focusIndex(0);
+      jest.runAllTimers();
+    });
+
+    onSelectionChanged.mockClear();
+
+    act(() => {
+      const headerWrapper = container.querySelector('.ms-DetailsList-headerWrapper');
+      fireEvent.keyDown(headerWrapper!, { which: KeyCodes.down, keyCode: KeyCodes.down });
+    });
+
+    expect(onSelectionChanged).toHaveBeenCalledTimes(0);
+  });
+
+  it('clears selection when escape key is pressed and isSelectedOnFocus is `true`', () => {
+    jest.useFakeTimers();
+
+    let component: IDetailsList | null = null;
+    const onSelectionChanged = jest.fn();
+    const selection = new Selection({
+      onSelectionChanged,
+    });
+
+    const { container } = render(
+      <DetailsList
+        componentRef={ref => (component = ref)}
+        items={mockData(5)}
+        selection={selection}
+        skipViewportMeasures={true}
+        onShouldVirtualize={() => false}
+      />,
+    );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      selection.setAllSelected(true);
+      jest.runAllTimers();
+    });
+
+    onSelectionChanged.mockClear();
+
+    act(() => {
+      const selectionZone = container.querySelector('.ms-SelectionZone');
+      fireEvent.keyDown(selectionZone!, { which: KeyCodes.escape, keyCode: KeyCodes.escape });
+    });
+
+    expect(onSelectionChanged).toHaveBeenCalledTimes(1);
+    expect(selection.getSelectedCount()).toEqual(0);
+  });
+
+  it('does not clear selection when escape key is pressed and isSelectedOnFocus is `false`', () => {
+    jest.useFakeTimers();
+
+    let component: IDetailsList | null = null;
+    const onSelectionChanged = jest.fn();
+    const selection = new Selection({
+      onSelectionChanged,
+    });
+
+    const { container } = render(
+      <DetailsList
+        componentRef={ref => (component = ref)}
+        items={mockData(5)}
+        selection={selection}
+        skipViewportMeasures={true}
+        onShouldVirtualize={() => false}
+        isSelectedOnFocus={false}
+      />,
+    );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      selection.setAllSelected(true);
+      jest.runAllTimers();
+    });
+
+    onSelectionChanged.mockClear();
+
+    act(() => {
+      const selectionZone = container.querySelector('.ms-SelectionZone');
+      fireEvent.keyDown(selectionZone!, { which: KeyCodes.escape, keyCode: KeyCodes.escape });
+    });
+
+    expect(onSelectionChanged).toHaveBeenCalledTimes(0);
+    expect(selection.getSelectedCount()).toEqual(5);
   });
 
   it('invokes optional onRenderMissingItem prop once per missing item rendered', () => {
     const onRenderMissingItem = jest.fn();
     const items = [...mockData(5), null, null];
 
-    safeMount(
+    const { unmount } = render(
       <DetailsList items={items} skipViewportMeasures={true} onRenderMissingItem={onRenderMissingItem} />,
-      () => {
-        expect(onRenderMissingItem).toHaveBeenCalledTimes(2);
-      },
     );
+
+    expect(onRenderMissingItem).toHaveBeenCalledTimes(2);
+    unmount();
   });
 
   it('does not invoke optional onRenderMissingItem prop if no missing items are rendered', () => {
     const onRenderMissingItem = jest.fn();
     const items = mockData(5);
 
-    safeMount(
+    const { unmount } = render(
       <DetailsList items={items} skipViewportMeasures={true} onRenderMissingItem={onRenderMissingItem} />,
-      () => {
-        expect(onRenderMissingItem).toHaveBeenCalledTimes(0);
-      },
     );
+
+    expect(onRenderMissingItem).toHaveBeenCalledTimes(0);
+    unmount();
   });
 
   it('executes onItemInvoked when double click is pressed', () => {
     const items = mockData(5);
     const onItemInvoked = jest.fn();
 
-    safeMount(
+    const { container } = render(
       <DetailsList items={items} skipViewportMeasures={true} onItemInvoked={onItemInvoked} />,
-      (wrapper: ReactWrapper) => {
-        wrapper.find('.ms-DetailsRow').first().simulate('dblclick');
-
-        expect(onItemInvoked).toHaveBeenCalledTimes(1);
-      },
     );
+
+    fireEvent.doubleClick(container.querySelector('.ms-DetailsRow')!);
+    expect(onItemInvoked).toHaveBeenCalledTimes(1);
   });
 
   it('executes onItemInvoked when enter is pressed', () => {
     const items = mockData(5);
     const onItemInvoked = jest.fn();
 
-    safeMount(
+    const { container } = render(
       <DetailsList items={items} skipViewportMeasures={true} onItemInvoked={onItemInvoked} />,
-      (wrapper: ReactWrapper) => {
-        wrapper.find('.ms-DetailsRow').first().simulate('keydown', { which: KeyCodes.enter });
-
-        expect(onItemInvoked).toHaveBeenCalledTimes(1);
-      },
     );
+
+    fireEvent.keyDown(container.querySelector('.ms-DetailsRow')!, { which: KeyCodes.enter, keyCode: KeyCodes.enter });
+    expect(onItemInvoked).toHaveBeenCalledTimes(1);
   });
 
   it('respects changed dragDropEvents prop on re-renders.', () => {
@@ -426,24 +577,24 @@ describe('DetailsList', () => {
     };
 
     const _RaiseEvent = (target: any, _eventName: string, _clientX: number) => {
-      EventGroup.raise(
-        target,
-        _eventName,
-        {
-          clientX: _clientX,
-          button: 0,
-        } as DragEvent,
-        true,
-      );
+      act(() => {
+        EventGroup.raise(
+          target,
+          _eventName,
+          {
+            clientX: _clientX,
+            button: 0,
+          } as DragEvent,
+          true,
+        );
+      });
     };
 
-    const container = document.createElement('div');
     const items = mockData(5);
     const columns = mockData(5, true);
 
-    ReactDOM.render(
+    const { rerender, container } = render(
       <DetailsListBase columns={columns} skipViewportMeasures={true} items={items} dragDropEvents={_dragDropEvents} />,
-      container,
     );
 
     let detailsRowSource = container.querySelector('div[aria-rowindex="2"][role="row"]') as HTMLDivElement;
@@ -455,10 +606,16 @@ describe('DetailsList', () => {
     expect(_dragDropEvents.onDragStart).toHaveBeenCalledTimes(1);
     expect(_dragDropEvents2.onDragStart).toHaveBeenCalledTimes(0);
 
-    ReactDOM.render(
-      <DetailsListBase columns={columns} skipViewportMeasures={true} items={items} dragDropEvents={_dragDropEvents} />,
-      container,
-    );
+    act(() => {
+      rerender(
+        <DetailsListBase
+          columns={columns}
+          skipViewportMeasures={true}
+          items={items}
+          dragDropEvents={_dragDropEvents}
+        />,
+      );
+    });
 
     detailsRowSource = container.querySelector('div[aria-rowindex="2"][role="row"]') as HTMLDivElement;
 
@@ -468,10 +625,16 @@ describe('DetailsList', () => {
     expect(_dragDropEvents.onDragStart).toHaveBeenCalledTimes(2);
     expect(_dragDropEvents2.onDragStart).toHaveBeenCalledTimes(0);
 
-    ReactDOM.render(
-      <DetailsListBase columns={columns} skipViewportMeasures={true} items={items} dragDropEvents={_dragDropEvents2} />,
-      container,
-    );
+    act(() => {
+      rerender(
+        <DetailsListBase
+          columns={columns}
+          skipViewportMeasures={true}
+          items={items}
+          dragDropEvents={_dragDropEvents2}
+        />,
+      );
+    });
 
     detailsRowSource = container.querySelector('div[aria-rowindex="2"][role="row"]') as HTMLDivElement;
 
@@ -483,6 +646,8 @@ describe('DetailsList', () => {
   });
 
   it('focuses into row element', () => {
+    jest.useFakeTimers();
+
     const onRenderColumn = (item: any, index: number, column: IColumn) => {
       let value = item && column && column.fieldName ? item[column.fieldName] : '';
       if (value === null || value === undefined) {
@@ -500,10 +665,9 @@ describe('DetailsList', () => {
       return valueKey;
     };
 
-    jest.useFakeTimers();
+    let component: IDetailsList | null = null;
 
-    let component: IDetailsList | null;
-    safeMount(
+    render(
       <DetailsList
         items={mockData(5)}
         componentRef={ref => (component = ref)}
@@ -512,96 +676,137 @@ describe('DetailsList', () => {
         onRenderItemColumn={onRenderColumn}
         getCellValueKey={getCellValueKey}
       />,
-      () => {
-        expect(component).toBeTruthy();
-        component!.focusIndex(3);
-        jest.runOnlyPendingTimers();
-        expect(
-          (document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent,
-        ).toEqual('3');
-        expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
-
-        // Set element visibility manually as a test workaround
-        (component as IDetailsList).focusIndex(4);
-        jest.runOnlyPendingTimers();
-        ((document.activeElement as HTMLElement).children[1] as any).isVisible = true;
-        ((document.activeElement as HTMLElement).children[1].children[0] as any).isVisible = true;
-        ((document.activeElement as HTMLElement).children[1].children[0].children[0] as any).isVisible = true;
-
-        (component as IDetailsList).focusIndex(4, true);
-        jest.runOnlyPendingTimers();
-        expect((document.activeElement as HTMLElement).textContent).toEqual('4');
-        expect((document.activeElement as HTMLElement).className.split(' ')).toContain('test-column');
-      },
     );
+
+    expect(component).toBeTruthy();
+
+    act(() => {
+      component!.focusIndex(3);
+      jest.runAllTimers();
+    });
+
+    expect(
+      (document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent,
+    ).toEqual('3');
+    expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
+
+    // Set element visibility manually as a test workaround
+    act(() => {
+      component!.focusIndex(4);
+      jest.runAllTimers();
+    });
+
+    // Manually set elements as visible for testing
+    ((document.activeElement as HTMLElement).children[1] as any).isVisible = true;
+    ((document.activeElement as HTMLElement).children[1].children[0] as any).isVisible = true;
+    ((document.activeElement as HTMLElement).children[1].children[0].children[0] as any).isVisible = true;
+
+    act(() => {
+      component!.focusIndex(4, true);
+      jest.runAllTimers();
+    });
+
+    expect((document.activeElement as HTMLElement).textContent).toEqual('4');
+    expect((document.activeElement as HTMLElement).className.split(' ')).toContain('test-column');
   });
 
   it('reset focusedItemIndex when setKey updates', () => {
     jest.useFakeTimers();
 
-    let component: any;
+    let component: DetailsListBase | null;
 
-    safeMount(
+    const { unmount, rerender } = render(
       <DetailsList
         items={mockData(5)}
         setKey={'key1'}
         initialFocusedIndex={0}
-        componentRef={ref => (component = ref)}
+        componentRef={value => (component = value as any)}
         skipViewportMeasures={true}
         onShouldVirtualize={() => false}
       />,
-      (wrapper: ReactWrapper) => {
-        expect(component).toBeTruthy();
-        component.setState({ focusedItemIndex: 3 });
-        setTimeout(() => {
-          expect(component.state.focusedItemIndex).toEqual(3);
-        }, 0);
-        jest.runOnlyPendingTimers();
-
-        // update props to new setKey
-        const newProps = { items: mockData(7), setKey: 'set2', initialFocusedIndex: 0 };
-        wrapper.setProps(newProps);
-        wrapper.update();
-
-        // verify that focusedItemIndex is reset to 0 and 0th row is focused
-        setTimeout(() => {
-          expect(component.state.focusedItemIndex).toEqual(0);
-          expect(
-            (document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent,
-          ).toEqual('0');
-          expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
-        }, 0);
-        jest.runOnlyPendingTimers();
-      },
     );
+
+    expect(component!).toBeTruthy();
+    component!.focusIndex(3);
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(component!.state.focusedItemIndex).toEqual(3);
+
+    // update props to new setKey
+    const newProps = { items: mockData(7), setKey: 'set2', initialFocusedIndex: 0 };
+    rerender(
+      <DetailsList
+        {...newProps}
+        componentRef={value => (component = value as any)}
+        skipViewportMeasures={true}
+        onShouldVirtualize={() => false}
+      />,
+    );
+
+    act(() => {
+      // verify that focusedItemIndex is reset to 0 and 0th row is focused
+      jest.runAllTimers();
+    });
+    expect(component!.state.focusedItemIndex).toEqual(0);
+    expect(
+      (document.activeElement as HTMLElement).querySelector('[data-automationid=DetailsRowCell]')!.textContent,
+    ).toEqual('0');
+    expect((document.activeElement as HTMLElement).className.split(' ')).toContain('ms-DetailsRow');
+
+    unmount();
   });
 
   it('invokes optional onColumnResize callback per IColumn if defined when columns are adjusted', () => {
+    jest.useFakeTimers();
+
     const columns: IColumn[] = mockData(2, true);
     columns[0].onColumnResize = jest.fn();
     columns[1].onColumnResize = jest.fn();
 
-    safeMount(<DetailsList items={mockData(2)} columns={columns} onShouldVirtualize={() => false} />, () => {
-      jest.runOnlyPendingTimers();
-      expect(columns[0].onColumnResize).toHaveBeenCalledTimes(1);
-      expect(columns[1].onColumnResize).toHaveBeenCalledTimes(1);
+    const { unmount } = render(<DetailsList items={mockData(2)} columns={columns} onShouldVirtualize={() => false} />);
+
+    act(() => {
+      jest.runAllTimers();
     });
+
+    expect(columns[0].onColumnResize).toHaveBeenCalledTimes(1);
+    expect(columns[1].onColumnResize).toHaveBeenCalledTimes(1);
+
+    unmount();
   });
 
   it('invokes optional onRenderDetailsHeader prop to customize DetailsHeader rendering when provided', () => {
     const onRenderDetailsHeaderMock = jest.fn();
 
-    safeMount(
+    const { unmount } = render(
       <DetailsList
         items={mockData(2)}
         skipViewportMeasures={true}
         onShouldVirtualize={() => false}
         onRenderDetailsHeader={onRenderDetailsHeaderMock}
       />,
-      () => {
-        expect(onRenderDetailsHeaderMock).toHaveBeenCalledTimes(1);
-      },
     );
+
+    expect(onRenderDetailsHeaderMock).toHaveBeenCalledTimes(1);
+    unmount();
+  });
+
+  it('calculates DetailsHeader and DetailsFooter in rowcount', () => {
+    const onRenderDetailsHeaderMock = jest.fn();
+    const onRenderDetailsFooterMock = jest.fn();
+
+    const component = render(
+      <DetailsList
+        items={mockData(5)}
+        onRenderDetailsHeader={onRenderDetailsHeaderMock}
+        onRenderDetailsFooter={onRenderDetailsFooterMock}
+      />,
+    );
+
+    const grid = component.getByRole('grid');
+    expect(grid).toHaveAttribute('aria-rowcount', '7');
   });
 
   it('invokes onRenderColumnHeaderTooltip to customize DetailsColumn tooltip rendering when provided', () => {
@@ -614,17 +819,17 @@ describe('DetailsList', () => {
       return <DetailsHeader {...props} onRenderColumnHeaderTooltip={onRenderColumnHeaderTooltipMock} />;
     };
 
-    safeMount(
+    const { unmount } = render(
       <DetailsList
         items={mockData(NUM_COLUMNS)}
         skipViewportMeasures={true}
         onShouldVirtualize={() => false}
         onRenderDetailsHeader={onRenderDetailsHeader}
       />,
-      () => {
-        expect(onRenderColumnHeaderTooltipMock).toHaveBeenCalledTimes(4);
-      },
     );
+
+    expect(onRenderColumnHeaderTooltipMock).toHaveBeenCalledTimes(4);
+    unmount();
   });
 
   it('invokes optional onRenderCheckbox callback to customize checkbox rendering when provided', () => {
@@ -632,7 +837,7 @@ describe('DetailsList', () => {
     const selection = new Selection();
     const theme = getTheme();
 
-    safeMount(
+    const { unmount } = render(
       <DetailsList
         items={mockData(2)}
         skipViewportMeasures={true}
@@ -642,73 +847,51 @@ describe('DetailsList', () => {
         selectionMode={SelectionMode.multiple}
         selection={selection}
       />,
-      () => {
-        expect(onRenderCheckboxMock).toHaveBeenCalledTimes(3);
-        expect(onRenderCheckboxMock.mock.calls[2][0]).toEqual({ checked: false, theme });
-
-        selection.setAllSelected(true);
-
-        expect(onRenderCheckboxMock).toHaveBeenCalledTimes(6);
-        expect(onRenderCheckboxMock.mock.calls[5][0]).toEqual({ checked: true, theme });
-      },
     );
+
+    expect(onRenderCheckboxMock).toHaveBeenCalledTimes(3);
+    expect(onRenderCheckboxMock.mock.calls[2][0]).toEqual({ checked: false, theme });
+
+    act(() => {
+      selection.setAllSelected(true);
+    });
+
+    expect(onRenderCheckboxMock).toHaveBeenCalledTimes(6);
+    expect(onRenderCheckboxMock.mock.calls[5][0]).toEqual({ checked: true, theme });
+    unmount();
   });
 
   it('initializes the selection mode object with the selectionMode prop', () => {
-    safeMount(
+    const { container, unmount } = render(
       <DetailsList items={mockData(5)} columns={mockData(5, true)} selectionMode={SelectionMode.none} />,
-      (wrapper: ReactWrapper) => {
-        const selectionZone = wrapper.find(SelectionZone);
-
-        expect(selectionZone.props().selection.mode).toEqual(SelectionMode.none);
-      },
     );
+
+    const selectionZone = container.querySelector('.ms-SelectionZone');
+
+    function getFiberProperty(element: Element): string {
+      return Object.keys(element).find(key => key.startsWith('__reactProps$')) as string;
+    }
+
+    const internalSelectionProp =
+      // @ts-expect-error - This is a private API and should not be used in production code
+      selectionZone?.parentElement[getFiberProperty(selectionZone.parentElement)].children.props.selection;
+    expect(internalSelectionProp.mode).toEqual(SelectionMode.none);
+
+    unmount();
   });
 
   it('handles updates to items and groups', () => {
     const tableOneItems = [
-      {
-        f1: 'A1',
-        f2: 'B1',
-        f3: 'C1',
-      },
-      {
-        f1: 'A2',
-        f2: 'B2',
-        f3: 'C2',
-      },
-      {
-        f1: 'A3',
-        f2: 'B3',
-        f3: 'C3',
-      },
-      {
-        f1: 'A4',
-        f2: 'B4',
-        f3: 'C4',
-      },
+      { f1: 'A1', f2: 'B1', f3: 'C1' },
+      { f1: 'A2', f2: 'B2', f3: 'C2' },
+      { f1: 'A3', f2: 'B3', f3: 'C3' },
+      { f1: 'A4', f2: 'B4', f3: 'C4' },
     ];
     const tableTwoItems = [
-      {
-        f1: 'D1',
-        f2: 'E1',
-        f3: 'F1',
-      },
-      {
-        f1: 'D2',
-        f2: 'E2',
-        f3: 'F2',
-      },
-      {
-        f1: 'D3',
-        f2: 'E3',
-        f3: 'F3',
-      },
-      {
-        f1: 'D4',
-        f2: 'E4',
-        f3: 'F4',
-      },
+      { f1: 'D1', f2: 'E1', f3: 'F1' },
+      { f1: 'D2', f2: 'E2', f3: 'F2' },
+      { f1: 'D3', f2: 'E3', f3: 'F3' },
+      { f1: 'D4', f2: 'E4', f3: 'F4' },
     ];
 
     const groupOneGroups: IGroup[] = [
@@ -749,7 +932,7 @@ describe('DetailsList', () => {
       return <div>{groupDividerProps.group?.name}</div>;
     };
 
-    const component = renderer.create(
+    const { container, rerender } = render(
       <DetailsList
         onRenderDetailsHeader={onRenderDetailsHeader}
         onRenderRow={onRenderRow}
@@ -761,11 +944,11 @@ describe('DetailsList', () => {
       />,
     );
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
 
     // New items, same groups
 
-    component.update(
+    rerender(
       <DetailsList
         onRenderDetailsHeader={onRenderDetailsHeader}
         onRenderRow={onRenderRow}
@@ -777,11 +960,11 @@ describe('DetailsList', () => {
       />,
     );
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
 
     // Same items, new groups
 
-    component.update(
+    rerender(
       <DetailsList
         onRenderDetailsHeader={onRenderDetailsHeader}
         onRenderRow={onRenderRow}
@@ -793,11 +976,11 @@ describe('DetailsList', () => {
       />,
     );
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
 
     // New items, same groups
 
-    component.update(
+    rerender(
       <DetailsList
         onRenderDetailsHeader={onRenderDetailsHeader}
         onRenderRow={onRenderRow}
@@ -809,45 +992,16 @@ describe('DetailsList', () => {
       />,
     );
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('handles paged updates to items within groups', () => {
-    const roundOneItems = [
-      {
-        f1: 'A1',
-        f2: 'B1',
-        f3: 'C1',
-      },
-      undefined,
-      {
-        f1: 'A3',
-        f2: 'B3',
-        f3: 'C3',
-      },
-      undefined,
-    ];
+    const roundOneItems = [{ f1: 'A1', f2: 'B1', f3: 'C1' }, undefined, { f1: 'A3', f2: 'B3', f3: 'C3' }, undefined];
     const roundTwoItems = [
-      {
-        f1: 'A1',
-        f2: 'B1',
-        f3: 'C1',
-      },
-      {
-        f1: 'A2',
-        f2: 'B2',
-        f3: 'C2',
-      },
-      {
-        f1: 'A3',
-        f2: 'B3',
-        f3: 'C3',
-      },
-      {
-        f1: 'A4',
-        f2: 'B4',
-        f3: 'C4',
-      },
+      { f1: 'A1', f2: 'B1', f3: 'C1' },
+      { f1: 'A2', f2: 'B2', f3: 'C2' },
+      { f1: 'A3', f2: 'B3', f3: 'C3' },
+      { f1: 'A4', f2: 'B4', f3: 'C4' },
     ];
 
     const groups: IGroup[] = [
@@ -885,7 +1039,7 @@ describe('DetailsList', () => {
       return <div>{groupDividerProps.group?.name}</div>;
     };
 
-    const component = renderer.create(
+    const { container, rerender } = render(
       <DetailsList
         onRenderDetailsHeader={onRenderDetailsHeader}
         onRenderRow={onRenderRow}
@@ -898,11 +1052,11 @@ describe('DetailsList', () => {
       />,
     );
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
 
     // New items, same groups
 
-    component.update(
+    rerender(
       <DetailsList
         onRenderDetailsHeader={onRenderDetailsHeader}
         onRenderRow={onRenderRow}
@@ -915,11 +1069,10 @@ describe('DetailsList', () => {
       />,
     );
 
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('returns an element with the correct text based on the second id passed in aria-labelledby', () => {
-    const container = document.createElement('div');
     const columns = [
       {
         key: 'column1',
@@ -934,7 +1087,7 @@ describe('DetailsList', () => {
     ];
     const items = mockData(1);
 
-    ReactDOM.render(
+    const { container } = render(
       <DetailsListBase
         items={mockData(1)}
         columns={columns}
@@ -942,7 +1095,6 @@ describe('DetailsList', () => {
         ariaLabelForSelectAllCheckbox="Toggle selection for all items"
         checkButtonAriaLabel="select row"
       />,
-      container,
     );
 
     const checkbox = container.querySelector('div[role="checkbox"][aria-label="select row"]') as HTMLElement;
@@ -952,7 +1104,7 @@ describe('DetailsList', () => {
   });
 
   it('has an aria-labelledby checkboxId that matches the id of the checkbox', () => {
-    const component = renderer.create(
+    const { container } = render(
       <DetailsList
         items={mockData(5)}
         columns={mockData(5, true)}
@@ -962,41 +1114,49 @@ describe('DetailsList', () => {
       />,
     );
 
-    const detailsRowSource = component.root.findAllByType(DetailsRow)[0];
-    const detailsRowCheckSource = detailsRowSource.findByType(DetailsRowCheck).props;
-    const checkboxId = detailsRowCheckSource.id;
+    const detailsRowSource = container.querySelector('[data-automationid="DetailsRow"]');
+    const detailsRowCheckSource = detailsRowSource?.querySelector('[data-automationid="DetailsRowCheck"]');
+    const checkboxId = detailsRowCheckSource?.id;
 
-    expect(checkboxId).toEqual(detailsRowCheckSource[`aria-labelledby`].split(' ')[0]);
+    expect(checkboxId).toEqual(detailsRowCheckSource?.getAttribute(`aria-labelledby`)?.split(' ')[0]);
   });
-});
 
-it('names group header checkboxes based on checkButtonGroupAriaLabel', () => {
-  const container = document.createElement('div');
-  ReactDOM.render(
-    <DetailsList
-      items={mockData(5)}
-      groups={[
-        {
-          key: 'group0',
-          name: 'Group 0',
-          startIndex: 0,
-          count: 2,
-        },
-        {
-          key: 'group1',
-          name: 'Group 1',
-          startIndex: 2,
-          count: 3,
-        },
-      ]}
-      checkButtonGroupAriaLabel="select section"
-    />,
-    container,
-  );
+  it('names group header checkboxes based on checkButtonGroupAriaLabel', () => {
+    const { container } = render(
+      <DetailsList
+        items={mockData(5)}
+        groups={[
+          {
+            key: 'group0',
+            name: 'Group 0',
+            startIndex: 0,
+            count: 2,
+          },
+          {
+            key: 'group1',
+            name: 'Group 1',
+            startIndex: 2,
+            count: 3,
+          },
+        ]}
+        checkButtonGroupAriaLabel="select section"
+      />,
+    );
 
-  const checkbox = container.querySelector('[role="checkbox"][aria-label="select section"]') as HTMLElement;
-  expect(checkbox).not.toBeNull();
+    const checkbox = container.querySelector('[role="checkbox"][aria-label="select section"]') as HTMLElement;
+    expect(checkbox).not.toBeNull();
 
-  const groupNameId = checkbox.getAttribute('aria-labelledby')?.split(' ')[1];
-  expect(container.querySelector(`#${groupNameId} span`)!.textContent).toEqual('Group 0');
+    const groupNameId = checkbox.getAttribute('aria-labelledby')?.split(' ')[1];
+    expect(container.querySelector(`#${groupNameId} span`)!.textContent).toEqual('Group 0');
+  });
+
+  it('makes the first row tabbable if isHeaderVisible is false', () => {
+    const { container } = render(
+      <DetailsList items={mockData(5)} columns={mockData(5, true)} isHeaderVisible={false} />,
+    );
+
+    const firstRow = container.querySelector('[data-automationid="DetailsRow"]');
+
+    expect(firstRow).toHaveAttribute('tabIndex', '0');
+  });
 });

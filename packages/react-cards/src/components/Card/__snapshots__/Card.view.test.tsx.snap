@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`CardView renders a Horizontal Card with an onClick function specified correctly 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         align-items: flex-start;
@@ -17,24 +17,17 @@ exports[`CardView renders a Horizontal Card with an onClick function specified c
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-left: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
-  onClick={[Function]}
-  onKeyDown={[Function]}
   role="button"
-  tabIndex={0}
+  tabindex="0"
 >
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -54,7 +47,7 @@ exports[`CardView renders a Horizontal Card with an onClick function specified c
 
 exports[`CardView renders a Horizontal Card with contents correctly 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         align-items: flex-start;
@@ -69,23 +62,17 @@ exports[`CardView renders a Horizontal Card with contents correctly 1`] = `
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-left: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
-  onKeyDown={[Function]}
   role="presentation"
-  tabIndex={-1}
+  tabindex="-1"
 >
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -101,12 +88,13 @@ exports[`CardView renders a Horizontal Card with contents correctly 1`] = `
     This is some content 1
   </div>
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -122,12 +110,13 @@ exports[`CardView renders a Horizontal Card with contents correctly 1`] = `
     This is some content 2
   </div>
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -147,7 +136,7 @@ exports[`CardView renders a Horizontal Card with contents correctly 1`] = `
 
 exports[`CardView renders a Horizontal Card without contents correctly 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         align-items: flex-start;
@@ -162,21 +151,14 @@ exports[`CardView renders a Horizontal Card without contents correctly 1`] = `
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-left: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
-  onKeyDown={[Function]}
   role="presentation"
-  tabIndex={-1}
+  tabindex="-1"
 />
 `;
 
 exports[`CardView renders a Vertical Card with an onClick function specified correctly 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         align-items: stretch;
@@ -191,24 +173,17 @@ exports[`CardView renders a Vertical Card with an onClick function specified cor
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-top: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
-  onClick={[Function]}
-  onKeyDown={[Function]}
   role="button"
-  tabIndex={0}
+  tabindex="0"
 >
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -228,7 +203,7 @@ exports[`CardView renders a Vertical Card with an onClick function specified cor
 
 exports[`CardView renders a Vertical Card with contents correctly 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         align-items: stretch;
@@ -243,23 +218,17 @@ exports[`CardView renders a Vertical Card with contents correctly 1`] = `
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-top: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
-  onKeyDown={[Function]}
   role="presentation"
-  tabIndex={-1}
+  tabindex="-1"
 >
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -275,12 +244,13 @@ exports[`CardView renders a Vertical Card with contents correctly 1`] = `
     This is some content 1
   </div>
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -296,12 +266,13 @@ exports[`CardView renders a Vertical Card with contents correctly 1`] = `
     This is some content 2
   </div>
   <div
-    className=
+    class=
         ms-StackItem
         ms-CardItem
         {
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
+          flex-basis: auto;
           flex-shrink: 0;
           font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
           font-size: 18px;
@@ -321,7 +292,7 @@ exports[`CardView renders a Vertical Card with contents correctly 1`] = `
 
 exports[`CardView renders a Vertical Card without contents correctly 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         align-items: stretch;
@@ -336,14 +307,7 @@ exports[`CardView renders a Vertical Card without contents correctly 1`] = `
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-top: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
-  onKeyDown={[Function]}
   role="presentation"
-  tabIndex={-1}
+  tabindex="-1"
 />
 `;

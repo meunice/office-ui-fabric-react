@@ -2,8 +2,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const resources = require('../../scripts/webpack/webpack-resources');
-const getResolveAlias = require('../../scripts/webpack/getResolveAlias');
+const { resources } = require('@fluentui/scripts-webpack');
+const { getResolveAlias } = require('@fluentui/scripts-webpack');
 const { addMonacoWebpackConfig } = require('@fluentui/react-monaco-editor/scripts/addMonacoWebpackConfig');
 const { getLoadSiteConfig } = require('@fluentui/public-docsite-setup/scripts/getLoadSiteConfig');
 
@@ -26,6 +26,8 @@ module.exports = function (env, argv) {
   /** @type {typeof import('@fluentui/public-docsite-setup').BUNDLE_NAME} */
   const entryPointName = 'fabric-site';
 
+  const outDir = path.join(__dirname, 'dist');
+
   /**
    * @param {boolean} isProductionConfig - Whether this particular config is for dev or production mode
    * @returns {webpack.Configuration}
@@ -34,31 +36,46 @@ module.exports = function (env, argv) {
     const chunkSuffix = isProductionConfig ? '.min.js' : '.js';
     const chunkId = isProductionConfig ? '[id]' : 'dev-[id]';
 
-    return addMonacoWebpackConfig({
-      entry: {
-        [entryPointName]: ['react-app-polyfill/ie11', './lib/root.js'],
-      },
+    return addMonacoWebpackConfig(
+      {
+        entry: {
+          [entryPointName]: ['react-app-polyfill/ie11', './lib/root.js'],
+        },
 
-      output: {
-        // Note that dev and production mode chunks MUST HAVE DIFFERENT NAMES (handled above).
-        // Otherwise they'll overwrite each other and cause hard-to-debug errors at runtime.
-        chunkFilename: `${entryPointName}-${version}-${chunkId}${chunkSuffix}`,
-      },
+        output: {
+          // Note that dev and production mode chunks MUST HAVE DIFFERENT NAMES (handled above).
+          // Otherwise they'll overwrite each other and cause hard-to-debug errors at runtime.
+          chunkFilename: `${entryPointName}-${version}-${chunkId}${chunkSuffix}`,
+        },
 
-      // The website config intentionally doesn't have React as an external because we bundle it
-      // to ensure we get a consistent version.
+        // The website config intentionally doesn't have React as an external because we bundle it
+        // to ensure we get a consistent version.
 
-      resolve: {
-        alias: getResolveAlias(true /*useLib*/),
+        resolve: {
+          alias: {
+            ...getResolveAlias(true /*useLib*/),
+            // public-docsite-resources exposes api reference JSON under dist/api that is consumed via
+            // require.context; its package exports field cannot map a directory, so alias to the real
+            // directory to resolve it.
+            '@fluentui/public-docsite-resources/dist/api': path.resolve(
+              __dirname,
+              '../public-docsite-resources/dist/api',
+            ),
+            // react-monaco-editor dynamically loads @types/react via proprietary webpack require.ensure,
+            // this doesn't work starting @types/react@17.0.48 as the types package introduced Export Maps
+            '@types/react/index.d.ts': path.resolve(__dirname, '../../node_modules/@types/react/index.d.ts'),
+          },
+        },
       },
-    });
+      { outDir },
+    );
   }
 
   return [
     // Copy index.html and generate bootstrap script
     getLoadSiteConfig({
       libraryPath: path.dirname(require.resolve('@fluentui/react/package.json')),
-      outDir: path.join(__dirname, 'dist'),
+      outDir,
       isProduction: isProductionArg,
       CopyWebpackPlugin,
       webpack,

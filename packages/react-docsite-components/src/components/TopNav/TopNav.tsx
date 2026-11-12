@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css, FocusZone, Panel, PanelType, ScreenWidthMinUhfMobile, on } from '@fluentui/react';
 import { IconButton } from '@fluentui/react/lib/Button';
-import { hasActiveChild, removeAnchorLink } from '../../utilities/index2';
+import { hasActiveChild, getNormalizedPath } from '../../utilities/index2';
 import { INavPage } from '../Nav/Nav.types';
 import { Badge } from '../Badge/index';
 import { ITopNavProps } from './TopNav.types';
@@ -20,7 +20,7 @@ export class TopNav extends React.Component<ITopNavProps, ITopNavState> {
 
   private _disposables: Function[] = [];
   private _isMounted: boolean = false;
-  private _route: string = removeAnchorLink(location.hash);
+  private _route: string = getNormalizedPath();
 
   public componentDidMount(): void {
     this._isMounted = true;
@@ -35,7 +35,7 @@ export class TopNav extends React.Component<ITopNavProps, ITopNavState> {
     this._disposables.forEach(dispose => dispose());
   }
 
-  public render(): JSX.Element {
+  public render(): React.ReactElement {
     const { isSmallScreen, isNavOpen } = this.state;
     const { onRenderNavFooter, pages, badgeText } = this.props;
 
@@ -103,7 +103,7 @@ export class TopNav extends React.Component<ITopNavProps, ITopNavState> {
   };
 
   private _onHashChange = (): void => {
-    const newRoute = removeAnchorLink(location.hash);
+    const newRoute = getNormalizedPath();
     if (this._isMounted && newRoute !== this._route) {
       this._route = newRoute;
       this.setState({ isNavOpen: false });
@@ -118,7 +118,7 @@ export class TopNav extends React.Component<ITopNavProps, ITopNavState> {
     this._isMounted && this.setState({ isNavOpen: false });
   };
 
-  private _renderAppLogo(pages: INavPage[]): JSX.Element | null {
+  private _renderAppLogo(pages: INavPage[]): React.ReactElement | null {
     const home = pages.filter((page: INavPage) => page.isHomePage)[0];
     if (home) {
       return (
@@ -131,7 +131,7 @@ export class TopNav extends React.Component<ITopNavProps, ITopNavState> {
     return null;
   }
 
-  private _renderLink(page: INavPage, linkIndex: number, isStacked?: boolean): JSX.Element | undefined {
+  private _renderLink(page: INavPage, linkIndex: number, isStacked?: boolean): React.ReactElement | undefined {
     const { platform } = this.props;
     if (page.isHiddenFromMainNav) {
       return undefined;
@@ -155,8 +155,8 @@ export class TopNav extends React.Component<ITopNavProps, ITopNavState> {
     );
   }
 
-  private _renderLinkList(pages: INavPage[], isStacked?: boolean): JSX.Element {
-    const links: (JSX.Element | undefined)[] = pages
+  private _renderLinkList(pages: INavPage[], isStacked?: boolean): React.ReactElement {
+    const links: (React.ReactElement | undefined)[] = pages
       .filter((page: INavPage) => {
         if (!page.isHiddenFromMainNav && page.isHomePage && !isStacked) {
           return false;

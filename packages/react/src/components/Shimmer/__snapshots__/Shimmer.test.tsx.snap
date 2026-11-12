@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Shimmer renders Shimmer correctly 1`] = `
 <div
-  className=
+  class=
       ms-Shimmer-container
       {
         -moz-osx-font-smoothing: grayscale;
@@ -15,7 +15,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
       }
 >
   <div
-    className=
+    class=
         ms-Shimmer-shimmerWrapper
         {
           background-color: #f3f2f1;
@@ -24,10 +24,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
           transform: translateZ(0);
           transition: opacity 200ms;
         }
-        & > * {
-          transform: translateZ(0);
-        }
-        @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+        @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
           -ms-high-contrast-adjust: none;
           background: WindowText
                                 linear-gradient(
@@ -39,14 +36,13 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
                                 no-repeat;
           forced-color-adjust: none;
         }
-    style={
-      Object {
-        "width": "50%",
-      }
-    }
+        & > div:last-child {
+          transform: translateZ(0);
+        }
+    style="width: 50%;"
   >
     <div
-      className=
+      class=
           ms-Shimmer-shimmerGradient
           {
             animation-direction: normal;
@@ -71,7 +67,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
           }
     />
     <div
-      className=
+      class=
           ms-ShimmerElementsGroup-root
           {
             -moz-osx-font-smoothing: grayscale;
@@ -84,14 +80,10 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
             font-weight: 400;
             position: relative;
           }
-      style={
-        Object {
-          "width": "auto",
-        }
-      }
+      style="width: auto;"
     >
       <div
-        className=
+        class=
             ms-ShimmerCircle-root
             {
               -moz-osx-font-smoothing: grayscale;
@@ -109,23 +101,23 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
               min-width: 30px;
               width: 30px;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
               border-color: Window;
             }
       >
         <svg
-          className=
+          class=
               ms-ShimmerCircle-svg
               {
                 display: block;
                 fill: #ffffff;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                 fill: Window;
               }
-          height={30}
+          height="30"
           viewBox="0 0 10 10"
-          width={30}
+          width="30"
         >
           <path
             d="M0,0 L10,0 L10,10 L0,10 L0,0 Z M0,5 C0,7.76142375 2.23857625,10 5,10 C7.76142375,10 10,7.76142375 10,5 C10,2.23857625 7.76142375,2.22044605e-16 5,0 C2.23857625,-2.22044605e-16 0,2.23857625 0,5 L0,5 Z"
@@ -133,7 +125,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
         </svg>
       </div>
       <div
-        className=
+        class=
             ms-ShimmerGap-root
             {
               -moz-osx-font-smoothing: grayscale;
@@ -150,19 +142,14 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
               font-weight: 400;
               height: 16px;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
               background-color: Window;
               border-color: Window;
             }
-        style={
-          Object {
-            "minWidth": "auto",
-            "width": "2%",
-          }
-        }
+        style="width: 2%; min-width: auto;"
       />
       <div
-        className=
+        class=
             ms-ShimmerLine-root
             {
               -moz-osx-font-smoothing: grayscale;
@@ -180,21 +167,16 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
               height: 20px;
               position: relative;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
               border-color: Window;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){& > * {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& > * {
               fill: Window;
             }
-        style={
-          Object {
-            "minWidth": "auto",
-            "width": "100%",
-          }
-        }
+        style="width: 100%; min-width: auto;"
       >
         <svg
-          className=
+          class=
               ms-ShimmerLine-topLeftCorner
               {
                 fill: #ffffff;
@@ -210,7 +192,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
           />
         </svg>
         <svg
-          className=
+          class=
               ms-ShimmerLine-topRightCorner
               {
                 fill: #ffffff;
@@ -226,7 +208,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
           />
         </svg>
         <svg
-          className=
+          class=
               ms-ShimmerLine-bottomRightCorner
               {
                 bottom: 0;
@@ -242,7 +224,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
           />
         </svg>
         <svg
-          className=
+          class=
               ms-ShimmerLine-bottomLeftCorner
               {
                 bottom: 0;
@@ -265,7 +247,7 @@ exports[`Shimmer renders Shimmer correctly 1`] = `
 
 exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
 <div
-  className=
+  class=
       ms-Shimmer-container
       {
         -moz-osx-font-smoothing: grayscale;
@@ -278,7 +260,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
       }
 >
   <div
-    className=
+    class=
         ms-Shimmer-shimmerWrapper
         {
           background-color: #f3f2f1;
@@ -287,10 +269,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
           transform: translateZ(0);
           transition: opacity 200ms;
         }
-        & > * {
-          transform: translateZ(0);
-        }
-        @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+        @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
           -ms-high-contrast-adjust: none;
           background: WindowText
                                 linear-gradient(
@@ -302,14 +281,13 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
                                 no-repeat;
           forced-color-adjust: none;
         }
-    style={
-      Object {
-        "width": 350,
-      }
-    }
+        & > * {
+          transform: translateZ(0);
+        }
+    style="width: 350px;"
   >
     <div
-      className=
+      class=
           ms-Shimmer-shimmerGradient
           {
             animation-direction: normal;
@@ -334,14 +312,10 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
           }
     />
     <div
-      style={
-        Object {
-          "display": "flex",
-        }
-      }
+      style="display: flex;"
     >
       <div
-        className=
+        class=
             ms-ShimmerElementsGroup-root
             {
               -moz-osx-font-smoothing: grayscale;
@@ -354,14 +328,10 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
               font-weight: 400;
               position: relative;
             }
-        style={
-          Object {
-            "width": "auto",
-          }
-        }
+        style="width: auto;"
       >
         <div
-          className=
+          class=
               ms-ShimmerLine-root
               {
                 -moz-osx-font-smoothing: grayscale;
@@ -379,21 +349,16 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
                 height: 40px;
                 position: relative;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                 border-color: Window;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& > * {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& > * {
                 fill: Window;
               }
-          style={
-            Object {
-              "minWidth": "40px",
-              "width": 40,
-            }
-          }
+          style="width: 40px; min-width: 40px;"
         >
           <svg
-            className=
+            class=
                 ms-ShimmerLine-topLeftCorner
                 {
                   fill: #ffffff;
@@ -409,7 +374,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-topRightCorner
                 {
                   fill: #ffffff;
@@ -425,7 +390,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-bottomRightCorner
                 {
                   bottom: 0;
@@ -441,7 +406,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-bottomLeftCorner
                 {
                   bottom: 0;
@@ -458,7 +423,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
           </svg>
         </div>
         <div
-          className=
+          class=
               ms-ShimmerGap-root
               {
                 -moz-osx-font-smoothing: grayscale;
@@ -475,20 +440,15 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
                 font-weight: 400;
                 height: 40px;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                 background-color: Window;
                 border-color: Window;
               }
-          style={
-            Object {
-              "minWidth": "10px",
-              "width": 10,
-            }
-          }
+          style="width: 10px; min-width: 10px;"
         />
       </div>
       <div
-        className=
+        class=
             ms-ShimmerElementsGroup-root
             {
               -moz-osx-font-smoothing: grayscale;
@@ -501,14 +461,10 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
               font-weight: 400;
               position: relative;
             }
-        style={
-          Object {
-            "width": "auto",
-          }
-        }
+        style="width: auto;"
       >
         <div
-          className=
+          class=
               ms-ShimmerLine-root
               {
                 -moz-osx-font-smoothing: grayscale;
@@ -526,21 +482,16 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
                 height: 10px;
                 position: relative;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                 border-color: Window;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& > * {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& > * {
                 fill: Window;
               }
-          style={
-            Object {
-              "minWidth": "300px",
-              "width": 300,
-            }
-          }
+          style="width: 300px; min-width: 300px;"
         >
           <svg
-            className=
+            class=
                 ms-ShimmerLine-topLeftCorner
                 {
                   fill: #ffffff;
@@ -556,7 +507,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-topRightCorner
                 {
                   fill: #ffffff;
@@ -572,7 +523,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-bottomRightCorner
                 {
                   bottom: 0;
@@ -588,7 +539,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-bottomLeftCorner
                 {
                   bottom: 0;
@@ -605,7 +556,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
           </svg>
         </div>
         <div
-          className=
+          class=
               ms-ShimmerLine-root
               {
                 -moz-osx-font-smoothing: grayscale;
@@ -623,21 +574,16 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
                 height: 10px;
                 position: relative;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                 border-color: Window;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& > * {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& > * {
                 fill: Window;
               }
-          style={
-            Object {
-              "minWidth": "200px",
-              "width": 200,
-            }
-          }
+          style="width: 200px; min-width: 200px;"
         >
           <svg
-            className=
+            class=
                 ms-ShimmerLine-topLeftCorner
                 {
                   fill: #ffffff;
@@ -653,7 +599,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-topRightCorner
                 {
                   fill: #ffffff;
@@ -669,7 +615,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-bottomRightCorner
                 {
                   bottom: 0;
@@ -685,7 +631,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
             />
           </svg>
           <svg
-            className=
+            class=
                 ms-ShimmerLine-bottomLeftCorner
                 {
                   bottom: 0;
@@ -702,7 +648,7 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
           </svg>
         </div>
         <div
-          className=
+          class=
               ms-ShimmerGap-root
               {
                 -moz-osx-font-smoothing: grayscale;
@@ -719,16 +665,11 @@ exports[`Shimmer renders Shimmer with custom elements correctly 1`] = `
                 font-weight: 400;
                 height: 20px;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                 background-color: Window;
                 border-color: Window;
               }
-          style={
-            Object {
-              "minWidth": "100px",
-              "width": 100,
-            }
-          }
+          style="width: 100px; min-width: 100px;"
         />
       </div>
     </div>

@@ -8,6 +8,8 @@ import type { IRefObject, IStyleFunctionOrObject } from '../../Utilities';
 import type { IFocusTrapZoneProps } from '../FocusTrapZone/index';
 import type { Target } from '@fluentui/react-hooks';
 
+import type { JSXElement } from '@fluentui/utilities';
+
 /**
  * {@docCategory TeachingBubble}
  */
@@ -21,6 +23,8 @@ export interface ITeachingBubble {
  * {@docCategory TeachingBubble}
  */
 export interface ITeachingBubbleProps extends React.RefAttributes<HTMLDivElement>, IAccessiblePopupProps {
+  children?: React.ReactNode;
+
   /**
    * Optional callback to access the ITeachingBubble interface. Use this instead of ref for accessing
    * the public methods and properties of the component.
@@ -86,7 +90,8 @@ export interface ITeachingBubbleProps extends React.RefAttributes<HTMLDivElement
    * Text that will be rendered in the footer of the TeachingBubble.
    * May be rendered alongside primary and secondary buttons.
    */
-  footerContent?: string | JSX.Element;
+
+  footerContent?: string | JSXElement;
 
   /**
    * Element to anchor the TeachingBubble to.

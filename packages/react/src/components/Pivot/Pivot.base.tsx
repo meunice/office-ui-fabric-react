@@ -13,6 +13,8 @@ import type { IContextualMenuProps } from '../ContextualMenu/ContextualMenu.type
 import type { IPivot, IPivotProps, IPivotStyleProps, IPivotStyles } from './Pivot.types';
 import type { IPivotItemProps } from './PivotItem.types';
 
+import type { JSXElement } from '@fluentui/utilities';
+
 const getClassNames = classNamesFunction<IPivotStyleProps, IPivotStyles>();
 
 const COMPONENT_NAME = 'Pivot';
@@ -41,13 +43,16 @@ const getLinkItems = (props: IPivotProps, pivotId: string): PivotLinkCollection 
 
   React.Children.forEach(React.Children.toArray(props.children), (child: React.ReactNode, index: number) => {
     if (isPivotItem(child)) {
-      // eslint-disable-next-line deprecation/deprecation
-      const { linkText, ...pivotItemProps } = child.props;
+      const {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
+        linkText,
+        ...pivotItemProps
+      } = child.props;
       const itemKey = child.props.itemKey || index.toString();
       result.links.push({
         headerText: linkText,
         ...pivotItemProps,
-        itemKey: itemKey,
+        itemKey,
       });
       result.keyToIndexMapping[itemKey] = index;
       result.keyToTabIdMapping[itemKey] = getTabId(props, pivotId, itemKey, index);
@@ -58,7 +63,7 @@ const getLinkItems = (props: IPivotProps, pivotId: string): PivotLinkCollection 
   return result;
 };
 
-const isPivotItem = (item: React.ReactNode): item is PivotItem => {
+const isPivotItem = (item: unknown): item is PivotItem => {
   return React.isValidElement(item) && (item.type as React.ComponentType)?.name === PivotItem.name;
 };
 
@@ -70,8 +75,18 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
 
     const [selectedKey, setSelectedKey] = useControllableValue(props.selectedKey, props.defaultSelectedKey);
 
-    const { componentRef, theme, linkSize, linkFormat, overflowBehavior, overflowAriaLabel, focusZoneProps } = props;
+    const {
+      componentRef,
+      theme,
+      linkSize,
+      linkFormat,
+      overflowBehavior,
+      overflowAriaLabel,
+      focusZoneProps,
+      overflowButtonAs,
+    } = props;
 
+    // eslint-disable-next-line prefer-const
     let classNames: { [key in keyof IPivotStyles]: string };
     const nameProps = {
       'aria-label': props['aria-label'],
@@ -90,7 +105,7 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
       },
     }));
 
-    const renderLinkContent = (link?: IPivotItemProps): JSX.Element | null => {
+    const renderLinkContent = (link?: IPivotItemProps): JSXElement | null => {
       if (!link) {
         return null;
       }
@@ -114,10 +129,11 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
       link: IPivotItemProps,
       renderPivotLinkSelectedKey: string | null | undefined,
       className: string,
-    ): JSX.Element => {
+    ): JSXElement => {
       const { itemKey, headerButtonProps, onRenderItemLink } = link;
       const tabId = renderLinkCollection.keyToTabIdMapping[itemKey!];
-      let linkContent: JSX.Element | null;
+
+      let linkContent: JSXElement | null;
       const isSelected: boolean = renderPivotLinkSelectedKey === itemKey;
 
       if (onRenderItemLink) {
@@ -130,9 +146,21 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
       contentString += link.itemCount ? ' (' + link.itemCount + ')' : '';
       // Adding space supplementary for icon
       contentString += link.itemIcon ? ' xx' : '';
+
+      const itemSemantics =
+        link.role && link.role !== 'tab'
+          ? {
+              role: link.role,
+            }
+          : {
+              role: 'tab',
+              'aria-selected': isSelected,
+            };
+
       return (
         <CommandButton
           {...headerButtonProps}
+          {...itemSemantics}
           id={tabId}
           key={itemKey}
           className={css(className, isSelected && classNames.linkIsSelected)}
@@ -141,8 +169,6 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
           // eslint-disable-next-line react/jsx-no-bind
           onKeyDown={(ev: React.KeyboardEvent<HTMLElement>) => onKeyDown(itemKey!, ev)}
           aria-label={link.ariaLabel}
-          role={link.role || 'tab'}
-          aria-selected={isSelected}
           name={link.headerText}
           keytipProps={link.keytipProps}
           data-content={contentString}
@@ -158,14 +184,17 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
     };
 
     const onKeyDown = (itemKey: string, ev: React.KeyboardEvent<HTMLElement>): void => {
-      // eslint-disable-next-line deprecation/deprecation
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       if (ev.which === KeyCodes.enter) {
         ev.preventDefault();
-        updateSelectedItem(itemKey);
+        updateSelectedItem(itemKey, ev);
       }
     };
 
-    const updateSelectedItem = (itemKey: string, ev?: React.MouseEvent<HTMLElement>): void => {
+    const updateSelectedItem = (
+      itemKey: string,
+      ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+    ): void => {
       setSelectedKey(itemKey);
       linkCollection = getLinkItems(props, pivotId);
       if (props.onLinkClick && linkCollection.keyToIndexMapping[itemKey] >= 0) {
@@ -179,7 +208,7 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
       overflowMenuButtonComponentRef.current?.dismissMenu();
     };
 
-    const renderPivotItem = (itemKey: string | undefined, isActive: boolean): JSX.Element | null => {
+    const renderPivotItem = (itemKey: string | undefined, isActive: boolean): JSXElement | null => {
       if (props.headersOnly || !itemKey) {
         return null;
       }
@@ -247,6 +276,8 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
           .slice(overflowIndex)
           .filter(link => link.itemKey !== renderedSelectedKey)
           .map((link, index) => {
+            link.role = 'menuitem';
+
             return {
               key: link.itemKey || `${overflowIndex + index}`,
               onRender: () => renderPivotLink(linkCollection, link, renderedSelectedKey, classNames.linkInMenu),
@@ -257,6 +288,7 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
       pinnedIndex: renderedSelectedIndex,
     });
 
+    const OverflowButton = overflowButtonAs ? overflowButtonAs : CommandButton;
     return (
       <div ref={ref} {...divProps}>
         <FocusZone
@@ -269,13 +301,15 @@ export const PivotBase: React.FunctionComponent<IPivotProps> = React.forwardRef<
         >
           {items}
           {overflowBehavior === 'menu' && (
-            <CommandButton
+            <OverflowButton
               className={css(classNames.link, classNames.overflowMenuButton)}
+              // eslint-disable-next-line @typescript-eslint/no-deprecated
               elementRef={overflowMenuButtonRef}
               componentRef={overflowMenuButtonComponentRef}
               menuProps={overflowMenuProps}
               menuIconProps={{ iconName: 'More', style: { color: 'inherit' } }}
               ariaLabel={overflowAriaLabel}
+              role="tab"
             />
           )}
         </FocusZone>

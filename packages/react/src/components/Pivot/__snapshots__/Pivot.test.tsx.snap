@@ -1,9 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         &:focus {
@@ -30,14 +30,12 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -46,6 +44,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -57,6 +56,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             font-size: 14px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -83,19 +83,37 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -104,14 +122,11 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -120,7 +135,13 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -146,7 +167,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -154,20 +175,15 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             right: 0px;
           }
       data-content="test"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="test"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -179,7 +195,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -192,7 +208,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -206,8 +222,8 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -215,6 +231,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -226,6 +243,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -252,19 +270,37 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -272,14 +308,11 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -288,7 +321,13 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -315,20 +354,15 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             display: none;
           }
       data-content="Test Link (20+)"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name="Test Link"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -340,7 +374,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -353,7 +387,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -364,7 +398,7 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
             Test Link
           </span>
           <span
-            className=
+            class=
                 ms-Pivot-count
                 {
                   display: inline-block;
@@ -380,14 +414,13 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div />
@@ -397,10 +430,10 @@ exports[`Pivot renders Pivot correctly when itemCount is a string 1`] = `
 
 exports[`Pivot renders Pivot correctly with custom className 1`] = `
 <div
-  className="specialClassName"
+  class="specialClassName"
 >
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         &:focus {
@@ -427,14 +460,12 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -443,6 +474,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -454,6 +486,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             font-size: 14px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -480,19 +513,37 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -501,14 +552,11 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -517,7 +565,13 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -543,7 +597,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -551,20 +605,15 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             right: 0px;
           }
       data-content="Test Link 1"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="Test Link 1"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -576,7 +625,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -589,7 +638,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -603,8 +652,8 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -612,6 +661,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -623,6 +673,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -649,19 +700,37 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -669,14 +738,11 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -685,7 +751,13 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -712,20 +784,15 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
             display: none;
           }
       data-content="Test Link 2"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name="Test Link 2"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -737,7 +804,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -750,7 +817,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -765,18 +832,17 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div
-      className="specialClassName"
+      class="specialClassName"
     />
   </div>
 </div>
@@ -785,7 +851,7 @@ exports[`Pivot renders Pivot correctly with custom className 1`] = `
 exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         &:focus {
@@ -812,14 +878,12 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -828,6 +892,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -839,6 +904,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             font-size: 14px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -865,19 +931,37 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -886,14 +970,11 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -902,7 +983,13 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -928,7 +1015,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -936,19 +1023,14 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             right: 0px;
           }
       data-content=" (12)"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -960,7 +1042,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -973,7 +1055,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-count
                 {
                   display: inline-block;
@@ -988,8 +1070,8 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -997,6 +1079,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -1008,6 +1091,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -1034,19 +1118,37 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -1054,14 +1156,11 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -1070,7 +1169,13 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -1097,20 +1202,15 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             display: none;
           }
       data-content="Test Link (12)"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name="Test Link"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -1122,7 +1222,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -1135,7 +1235,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -1146,7 +1246,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             Test Link
           </span>
           <span
-            className=
+            class=
                 ms-Pivot-count
                 {
                   display: inline-block;
@@ -1161,8 +1261,8 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -1170,6 +1270,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -1181,6 +1282,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -1207,19 +1309,37 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -1227,14 +1347,11 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -1243,7 +1360,13 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -1270,20 +1393,15 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             display: none;
           }
       data-content="Text with icon xx"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab2"
       name="Text with icon"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -1295,7 +1413,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -1308,11 +1426,11 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
               }
         >
           <span
-            className="ms-Pivot-icon"
+            class="ms-Pivot-icon"
           >
             <i
-              aria-hidden={true}
-              className=
+              aria-hidden="true"
+              class=
 
                   {
                     -moz-osx-font-smoothing: grayscale;
@@ -1322,6 +1440,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
                     font-style: normal;
                     font-weight: normal;
                     speak: none;
+                    text-decoration: inherit;
                   }
               data-icon-name="Recent"
             >
@@ -1329,7 +1448,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
             </i>
           </span>
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -1344,14 +1463,13 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div />
@@ -1362,7 +1480,7 @@ exports[`Pivot renders Pivot correctly with icon, text and count 1`] = `
 exports[`Pivot renders Pivot with overflow 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         &:focus {
@@ -1389,14 +1507,12 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -1405,6 +1521,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -1416,6 +1533,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             font-size: 14px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -1442,19 +1560,37 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -1463,14 +1599,11 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -1479,7 +1612,13 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -1505,7 +1644,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -1513,20 +1652,15 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             right: 0px;
           }
       data-content="Test 1"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="Test 1"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -1538,7 +1672,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -1551,7 +1685,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -1565,8 +1699,8 @@ exports[`Pivot renders Pivot with overflow 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -1574,6 +1708,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -1585,6 +1720,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -1611,19 +1747,37 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -1631,14 +1785,11 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -1647,7 +1798,13 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -1674,20 +1831,15 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             display: none;
           }
       data-content="Test 2"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name="Test 2"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -1699,7 +1851,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -1712,7 +1864,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -1726,10 +1878,9 @@ exports[`Pivot renders Pivot with overflow 1`] = `
       </span>
     </button>
     <button
-      aria-controls={null}
-      aria-expanded={false}
-      aria-haspopup={true}
-      className=
+      aria-expanded="false"
+      aria-haspopup="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -1739,6 +1890,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -1750,6 +1902,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -1778,19 +1931,37 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -1798,14 +1969,11 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -1814,7 +1982,13 @@ exports[`Pivot renders Pivot with overflow 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -1844,17 +2018,13 @@ exports[`Pivot renders Pivot with overflow 1`] = `
             position: relative;
             visibility: visible;
           }
-      data-is-focusable={true}
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
+      data-is-focusable="true"
+      role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -1866,12 +2036,13 @@ exports[`Pivot renders Pivot with overflow 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <i
-          aria-hidden={true}
-          className=
+          aria-hidden="true"
+          class=
               ms-Icon
               ms-Button-menuIcon
               {
                 display: inline-block;
+                text-decoration: inherit;
               }
               {
                 -moz-osx-font-smoothing: grayscale;
@@ -1894,12 +2065,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
                 text-align: center;
               }
           data-icon-name="More"
-          style={
-            Object {
-              "color": "inherit",
-              "fontFamily": "\\"FabricMDL2Icons\\"",
-            }
-          }
+          style="font-family: \\"FabricMDL2Icons\\"; color: inherit;"
         >
           
         </i>
@@ -1907,14 +2073,13 @@ exports[`Pivot renders Pivot with overflow 1`] = `
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div />
@@ -1925,7 +2090,7 @@ exports[`Pivot renders Pivot with overflow 1`] = `
 exports[`Pivot renders large link Pivot correctly 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         ms-Pivot--large
@@ -1953,14 +2118,12 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -1969,6 +2132,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -1980,6 +2144,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             font-size: 18px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -2006,19 +2171,37 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -2027,14 +2210,11 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -2043,7 +2223,13 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -2069,7 +2255,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -2077,20 +2263,15 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             right: 0px;
           }
       data-content="Test Link 1"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="Test Link 1"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -2102,7 +2283,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -2115,7 +2296,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -2129,8 +2310,8 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -2138,6 +2319,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -2149,6 +2331,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             font-size: 18px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -2175,19 +2358,37 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -2195,14 +2396,11 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -2211,7 +2409,13 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -2238,20 +2442,15 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
             display: none;
           }
       data-content=""
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name=""
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -2263,7 +2462,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -2276,7 +2475,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -2284,21 +2483,19 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
                 }
           >
              
-            
           </span>
         </span>
       </span>
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div />
@@ -2309,7 +2506,7 @@ exports[`Pivot renders large link Pivot correctly 1`] = `
 exports[`Pivot renders large tabbed Pivot correctly 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         ms-Pivot--large
@@ -2338,14 +2535,12 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -2354,6 +2549,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: #ffffff;
             border-radius: 0px;
             border: 0px;
@@ -2365,6 +2561,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             font-size: 18px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 0px;
             outline: transparent;
@@ -2392,19 +2589,37 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -2413,25 +2628,28 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             color: #ffffff;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
           }
-          &:focus {
-            color: #000000;
-            outline-offset: -1px;
-            outline: none;
-          }
           &:active {
-            background-color: #005a9e;
+            background-color: #0078d4;
             color: #ffffff;
           }
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            color: #000000;
+            outline-offset: -2px;
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -2459,6 +2677,11 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             height: auto;
             transition: none;
           }
+          :host(.ms-Fabric--isFocusVisible) &:focus::before {
+            background: transparent;
+            height: auto;
+            transition: none;
+          }
           &.is-selected {
             background-color: #0078d4;
             color: #ffffff;
@@ -2479,17 +2702,27 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             background-color: #106ebe;
             color: #ffffff;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&.is-selected {
+          &.is-selected:active {
+            background-color: #005a9e;
+            color: #ffffff;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&.is-selected {
             -ms-high-contrast-adjust: none;
             background: Highlight;
             color: HighlightText;
             font-weight: 600;
             forced-color-adjust: none;
           }
+          .ms-Fabric--isFocusVisible &.is-selected:focus {
+            outline-color: #ffffff;
+          }
+          :host(.ms-Fabric--isFocusVisible) &.is-selected:focus {
+            outline-color: #ffffff;
+          }
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -2497,20 +2730,15 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             right: 0px;
           }
       data-content="Test Link 1"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="Test Link 1"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -2522,7 +2750,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -2535,7 +2763,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -2549,8 +2777,8 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -2558,6 +2786,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: #ffffff;
             border-radius: 0px;
             border: 0px;
@@ -2569,6 +2798,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             font-size: 18px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 0px;
             outline: transparent;
@@ -2596,19 +2826,37 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -2616,25 +2864,28 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             color: #ffffff;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
           }
-          &:focus {
-            color: #000000;
-            outline-offset: -1px;
-            outline: none;
-          }
           &:active {
-            background-color: #005a9e;
+            background-color: #0078d4;
             color: #ffffff;
           }
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            color: #000000;
+            outline-offset: -2px;
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -2662,6 +2913,11 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             height: auto;
             transition: none;
           }
+          :host(.ms-Fabric--isFocusVisible) &:focus::before {
+            background: transparent;
+            height: auto;
+            transition: none;
+          }
           &.is-selected {
             background-color: #0078d4;
             color: #ffffff;
@@ -2682,31 +2938,36 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
             background-color: #106ebe;
             color: #ffffff;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&.is-selected {
+          &.is-selected:active {
+            background-color: #005a9e;
+            color: #ffffff;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&.is-selected {
             -ms-high-contrast-adjust: none;
             background: Highlight;
             color: HighlightText;
             font-weight: 600;
             forced-color-adjust: none;
           }
+          .ms-Fabric--isFocusVisible &.is-selected:focus {
+            outline-color: #ffffff;
+          }
+          :host(.ms-Fabric--isFocusVisible) &.is-selected:focus {
+            outline-color: #ffffff;
+          }
           &[data-is-overflowing='true'] {
             display: none;
           }
       data-content=""
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name=""
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -2718,7 +2979,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -2731,7 +2992,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -2739,21 +3000,19 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
                 }
           >
              
-            
           </span>
         </span>
       </span>
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div />
@@ -2764,7 +3023,7 @@ exports[`Pivot renders large tabbed Pivot correctly 1`] = `
 exports[`Pivot renders link Pivot correctly 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         &:focus {
@@ -2791,14 +3050,12 @@ exports[`Pivot renders link Pivot correctly 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -2807,6 +3064,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -2818,6 +3076,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             font-size: 14px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -2844,19 +3103,37 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -2865,14 +3142,11 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -2881,7 +3155,13 @@ exports[`Pivot renders link Pivot correctly 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -2907,7 +3187,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -2915,20 +3195,15 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             right: 0px;
           }
       data-content="Test Link 1"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="Test Link 1"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -2940,7 +3215,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -2953,7 +3228,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -2967,8 +3242,8 @@ exports[`Pivot renders link Pivot correctly 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -2976,6 +3251,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -2987,6 +3263,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -3013,19 +3290,37 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -3033,14 +3328,11 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -3049,7 +3341,13 @@ exports[`Pivot renders link Pivot correctly 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -3076,20 +3374,15 @@ exports[`Pivot renders link Pivot correctly 1`] = `
             display: none;
           }
       data-content=""
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name=""
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -3101,7 +3394,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -3114,7 +3407,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -3122,21 +3415,19 @@ exports[`Pivot renders link Pivot correctly 1`] = `
                 }
           >
              
-            
           </span>
         </span>
       </span>
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div />
@@ -3147,7 +3438,7 @@ exports[`Pivot renders link Pivot correctly 1`] = `
 exports[`Pivot renders tabbed Pivot correctly 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         ms-Pivot--tabs
@@ -3175,14 +3466,12 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -3191,6 +3480,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: #ffffff;
             border-radius: 0px;
             border: 0px;
@@ -3202,6 +3492,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             font-size: 14px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 0px;
             outline: transparent;
@@ -3229,19 +3520,37 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -3250,25 +3559,28 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             color: #ffffff;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
           }
-          &:focus {
-            color: #000000;
-            outline-offset: -1px;
-            outline: none;
-          }
           &:active {
-            background-color: #005a9e;
+            background-color: #0078d4;
             color: #ffffff;
           }
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            color: #000000;
+            outline-offset: -2px;
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -3296,6 +3608,11 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             height: auto;
             transition: none;
           }
+          :host(.ms-Fabric--isFocusVisible) &:focus::before {
+            background: transparent;
+            height: auto;
+            transition: none;
+          }
           &.is-selected {
             background-color: #0078d4;
             color: #ffffff;
@@ -3316,17 +3633,27 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             background-color: #106ebe;
             color: #ffffff;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&.is-selected {
+          &.is-selected:active {
+            background-color: #005a9e;
+            color: #ffffff;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&.is-selected {
             -ms-high-contrast-adjust: none;
             background: Highlight;
             color: HighlightText;
             font-weight: 600;
             forced-color-adjust: none;
           }
+          .ms-Fabric--isFocusVisible &.is-selected:focus {
+            outline-color: #ffffff;
+          }
+          :host(.ms-Fabric--isFocusVisible) &.is-selected:focus {
+            outline-color: #ffffff;
+          }
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -3334,20 +3661,15 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             right: 0px;
           }
       data-content="Test Link 1"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="Test Link 1"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -3359,7 +3681,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -3372,7 +3694,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -3386,8 +3708,8 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
       </span>
     </button>
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -3395,6 +3717,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: #ffffff;
             border-radius: 0px;
             border: 0px;
@@ -3406,6 +3729,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 0px;
             outline: transparent;
@@ -3433,19 +3757,37 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -3453,25 +3795,28 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             color: #ffffff;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
           }
-          &:focus {
-            color: #000000;
-            outline-offset: -1px;
-            outline: none;
-          }
           &:active {
-            background-color: #005a9e;
+            background-color: #0078d4;
             color: #ffffff;
           }
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            color: #000000;
+            outline-offset: -2px;
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -3499,6 +3844,11 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             height: auto;
             transition: none;
           }
+          :host(.ms-Fabric--isFocusVisible) &:focus::before {
+            background: transparent;
+            height: auto;
+            transition: none;
+          }
           &.is-selected {
             background-color: #0078d4;
             color: #ffffff;
@@ -3519,31 +3869,36 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
             background-color: #106ebe;
             color: #ffffff;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&.is-selected {
+          &.is-selected:active {
+            background-color: #005a9e;
+            color: #ffffff;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&.is-selected {
             -ms-high-contrast-adjust: none;
             background: Highlight;
             color: HighlightText;
             font-weight: 600;
             forced-color-adjust: none;
           }
+          .ms-Fabric--isFocusVisible &.is-selected:focus {
+            outline-color: #ffffff;
+          }
+          :host(.ms-Fabric--isFocusVisible) &.is-selected:focus {
+            outline-color: #ffffff;
+          }
           &[data-is-overflowing='true'] {
             display: none;
           }
       data-content=""
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name=""
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -3555,7 +3910,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -3568,7 +3923,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -3576,21 +3931,19 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
                 }
           >
              
-            
           </span>
         </span>
       </span>
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab0"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div />
@@ -3601,7 +3954,7 @@ exports[`Pivot renders tabbed Pivot correctly 1`] = `
 exports[`Pivot supports JSX expressions 1`] = `
 <div>
   <div
-    className=
+    class=
         ms-FocusZone
         ms-Pivot
         &:focus {
@@ -3628,14 +3981,12 @@ exports[`Pivot supports JSX expressions 1`] = `
           white-space: nowrap;
         }
     data-focuszone-id="FocusZone1"
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onMouseDownCapture={[Function]}
+    data-tabster="{\\"uncontrolled\\": {}}"
     role="tablist"
   >
     <button
-      aria-selected={false}
-      className=
+      aria-selected="false"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -3643,6 +3994,7 @@ exports[`Pivot supports JSX expressions 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -3654,6 +4006,7 @@ exports[`Pivot supports JSX expressions 1`] = `
             font-size: 14px;
             font-weight: 400;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -3680,19 +4033,37 @@ exports[`Pivot supports JSX expressions 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
           }
           &:hover {
@@ -3700,14 +4071,11 @@ exports[`Pivot supports JSX expressions 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -3716,7 +4084,13 @@ exports[`Pivot supports JSX expressions 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -3743,20 +4117,15 @@ exports[`Pivot supports JSX expressions 1`] = `
             display: none;
           }
       data-content="Test Link 1"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab0"
       name="Test Link 1"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="0"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -3768,7 +4137,7 @@ exports[`Pivot supports JSX expressions 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -3781,7 +4150,7 @@ exports[`Pivot supports JSX expressions 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -3795,8 +4164,8 @@ exports[`Pivot supports JSX expressions 1`] = `
       </span>
     </button>
     <button
-      aria-selected={true}
-      className=
+      aria-selected="true"
+      class=
           ms-Button
           ms-Button--action
           ms-Button--command
@@ -3805,6 +4174,7 @@ exports[`Pivot supports JSX expressions 1`] = `
           {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
+            align-items: center;
             background-color: transparent;
             border-radius: 0px;
             border: 0px;
@@ -3816,6 +4186,7 @@ exports[`Pivot supports JSX expressions 1`] = `
             font-size: 14px;
             font-weight: 600;
             height: 44px;
+            justify-content: center;
             line-height: 44px;
             margin-right: 8px;
             outline: transparent;
@@ -3842,19 +4213,37 @@ exports[`Pivot supports JSX expressions 1`] = `
             top: 2px;
             z-index: 1;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
             bottom: -2px;
             left: -2px;
             outline-color: ButtonText;
             right: -2px;
             top: -2px;
           }
-          &:active > * {
+          :host(.ms-Fabric--isFocusVisible) &:focus:after {
+            border: 0px;
+            bottom: 2px;
+            content: attr(data-content);
+            left: 2px;
+            outline: 1px solid #605e5c;
+            position: relative;
+            right: 2px;
+            top: 2px;
+            z-index: 1;
+          }
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+            bottom: -2px;
+            left: -2px;
+            outline-color: ButtonText;
+            right: -2px;
+            top: -2px;
+          }
+          &:active > span {
             left: 0px;
             position: relative;
             top: 0px;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
             border-color: Window;
             color: Highlight;
           }
@@ -3863,14 +4252,11 @@ exports[`Pivot supports JSX expressions 1`] = `
             color: #201f1e;
             cursor: pointer;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
             color: Highlight;
           }
           &:hover .ms-Button-icon {
             color: #0078d4;
-          }
-          &:focus {
-            outline: none;
           }
           &:active {
             background-color: #edebe9;
@@ -3879,7 +4265,13 @@ exports[`Pivot supports JSX expressions 1`] = `
           &:active .ms-Button-icon {
             color: #004578;
           }
+          &:focus {
+            outline: none;
+          }
           .ms-Fabric--isFocusVisible &:focus {
+            outline: 1px solid #605e5c;
+          }
+          :host(.ms-Fabric--isFocusVisible) &:focus {
             outline: 1px solid #605e5c;
           }
           &:before {
@@ -3905,7 +4297,7 @@ exports[`Pivot supports JSX expressions 1`] = `
           &[data-is-overflowing='true'] {
             display: none;
           }
-          @media screen and (-ms-high-contrast: active), (forced-colors: active){&:before {
+          @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:before {
             background-color: Highlight;
           }
           &:hover::before {
@@ -3913,20 +4305,15 @@ exports[`Pivot supports JSX expressions 1`] = `
             right: 0px;
           }
       data-content="Test Link 3"
-      data-is-focusable={true}
+      data-is-focusable="true"
       id="Pivot0-Tab1"
       name="Test Link 3"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      onKeyPress={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseUp={[Function]}
       role="tab"
+      tabindex="-1"
       type="button"
     >
       <span
-        className=
+        class=
             ms-Button-flexContainer
             {
               align-items: center;
@@ -3938,7 +4325,7 @@ exports[`Pivot supports JSX expressions 1`] = `
         data-automationid="splitbuttonprimary"
       >
         <span
-          className=
+          class=
               ms-Pivot-linkContent
               {
                 flex: 0 1 100%;
@@ -3951,7 +4338,7 @@ exports[`Pivot supports JSX expressions 1`] = `
               }
         >
           <span
-            className=
+            class=
                 ms-Pivot-text
                 {
                   display: inline-block;
@@ -3966,14 +4353,13 @@ exports[`Pivot supports JSX expressions 1`] = `
     </button>
   </div>
   <div
-    aria-hidden={false}
+    aria-hidden="false"
     aria-labelledby="Pivot0-Tab1"
-    className=
+    class=
 
         &[hidden] {
           display: none;
         }
-    hidden={false}
     role="tabpanel"
   >
     <div>

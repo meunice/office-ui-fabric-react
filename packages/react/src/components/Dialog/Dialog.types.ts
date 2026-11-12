@@ -8,7 +8,9 @@ import type { IWithResponsiveModeState } from '../../ResponsiveMode';
 import type { IAccessiblePopupProps } from '../../common/IAccessiblePopupProps';
 import type { IStyle, ITheme } from '../../Styling';
 import type { IRefObject, IStyleFunctionOrObject } from '../../Utilities';
-import type { ICSSRule, ICSSPixelUnitRule } from '@fluentui/merge-styles/lib/IRawStyleBase';
+import type { ICSSRule, ICSSPixelUnitRule } from '@fluentui/merge-styles';
+
+import type { JSXElement } from '@fluentui/utilities';
 
 /**
  * {@docCategory Dialog}
@@ -20,9 +22,10 @@ export interface IDialog {}
  */
 export interface IDialogProps
   extends React.ClassAttributes<DialogBase>,
-    // eslint-disable-next-line deprecation/deprecation
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     IWithResponsiveModeState,
     IAccessiblePopupProps {
+  children?: React.ReactNode;
   /**
    * @deprecated Unused, returns no value
    */
@@ -122,7 +125,8 @@ export interface IDialogProps
    * The title text to display at the top of the dialog.
    * @deprecated Pass through via `dialogContentProps` instead.
    */
-  title?: string | JSX.Element;
+
+  title?: string | JSXElement;
 
   /**
    * The subtext to display in the dialog.

@@ -1,35 +1,24 @@
 {
-  "name": "perf-test",
+  "name": "@fluentui/perf-test",
   "description": "Perf tests for @fluentui/react.",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "just-scripts build",
-    "bundle": "just-scripts bundle",
-    "lint": "just-scripts lint",
-    "just": "just-scripts",
-    "clean": "just-scripts clean",
-    "code-style": "just-scripts code-style"
-  },
-  "devDependencies": {
-    "@fluentui/eslint-plugin": "*"
+    "bundle": "yarn run -T just-scripts perf-test:bundle",
+    "lint": "yarn run -T just-scripts lint",
+    "just": "yarn run -T just-scripts",
+    "clean": "yarn run -T just-scripts clean",
+    "code-style": "yarn run -T just-scripts code-style",
+    "type-check": "yarn run -T just-scripts type-check",
+    "test-perf": "yarn run -T just-scripts perf-test"
   },
   "dependencies": {
-    "@fluentui/make-styles": "9.0.0-beta.2",
-    "@fluentui/react": "^8.43.0",
-    "@fluentui/react-avatar": "9.0.0-beta.3",
-    "@fluentui/react-button": "9.0.0-beta.4",
-    "@fluentui/react-provider": "9.0.0-beta.4",
-    "@fluentui/react-theme": "9.0.0-beta.3",
-    "@fluentui/scripts": "^1.0.0",
+    "@fluentui/example-data": "*",
+    "@fluentui/react": "*",
+    "@fluentui/scripts-perf-test-flamegrill": "*",
     "@microsoft/load-themed-styles": "^1.10.26",
-    "@types/react-dom": "16.9.10",
-    "@types/react": "16.9.42",
-    "flamegrill": "0.2.0",
-    "lodash": "^4.17.15",
-    "querystring": "^0.2.0",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "tslib": "^2.1.0"
   }
 }

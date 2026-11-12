@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRefEffect } from '@fluentui/react-hooks';
+import { useIsomorphicLayoutEffect, useRefEffect } from '@fluentui/react-hooks';
 import { getWindow } from '@fluentui/utilities';
 import { observeResize } from './observeResize';
 import type { RefCallback } from '@fluentui/react-hooks';
@@ -53,8 +53,8 @@ export type OverflowRefs = {
  * ```
  */
 export const useOverflow = ({ onOverflowItemsChanged, rtl, pinnedIndex }: OverflowParams): OverflowRefs => {
-  const updateOverflowRef = React.useRef<() => void>();
-  const containerWidthRef = React.useRef<number>();
+  const updateOverflowRef = React.useRef<() => void>(undefined);
+  const containerWidthRef = React.useRef<number>(undefined);
 
   // Attach a resize observer to the container
   const containerRef = useRefEffect<HTMLElement>(container => {
@@ -76,8 +76,7 @@ export const useOverflow = ({ onOverflowItemsChanged, rtl, pinnedIndex }: Overfl
     return () => containerRef(null);
   });
 
-  // eslint-disable-next-line no-restricted-properties
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const container = containerRef.current;
     const menuButton = menuButtonRef.current;
     if (!container || !menuButton) {

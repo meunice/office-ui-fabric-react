@@ -2,10 +2,10 @@ import './version';
 export {
   Async,
   AutoScroll,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   BaseComponent,
   Customizations,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   Customizer,
   CustomizerContext,
   DATA_IS_SCROLLABLE_ATTRIBUTE,
@@ -14,6 +14,8 @@ export {
   EventGroup,
   FabricPerformance,
   FocusRects,
+  FocusRectsContext,
+  FocusRectsProvider,
   GlobalSettings,
   IsFocusVisibleClassName,
   KeyCodes,
@@ -37,6 +39,7 @@ export {
   baseElementProperties,
   buttonProperties,
   calculatePrecision,
+  canUseDOM,
   classNamesFunction,
   colGroupProperties,
   colProperties,
@@ -65,10 +68,12 @@ export {
   focusFirstChild,
   formProperties,
   format,
+  getActiveElement,
   getChildren,
   getDistanceBetweenPoints,
   getDocument,
   getElementIndexPath,
+  getEventTarget,
   getFirstFocusable,
   getFirstTabbable,
   getFirstVisibleElementFromSelector,
@@ -87,7 +92,7 @@ export {
   getRTL,
   getRTLSafeKeyCode,
   getRect,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   getResourceUrl,
   getScrollbarWidth,
   getVirtualParent,
@@ -99,11 +104,11 @@ export {
   hoistStatics,
   htmlElementProperties,
   iframeProperties,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   imageProperties,
   imgProperties,
   initializeComponentRef,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   initializeFocusRects,
   inputProperties,
   isControlled,
@@ -127,6 +132,8 @@ export {
   mergeCustomizations,
   mergeScopedSettings,
   mergeSettings,
+  MergeStylesShadowRootProvider,
+  MergeStylesRootProvider,
   modalize,
   nullRender,
   olProperties,
@@ -135,7 +142,9 @@ export {
   optionProperties,
   portalContainsElement,
   precisionRound,
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   raiseClick,
+  removeDirectionalKeyCode,
   removeIndex,
   replaceElement,
   resetControlledWarnings,
@@ -144,14 +153,15 @@ export {
   safeRequestAnimationFrame,
   safeSetTimeout,
   selectProperties,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   setBaseUrl,
   setFocusVisibility,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   setLanguage,
   setMemoizeWeakMap,
   setPortalAttribute,
   setRTL,
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   setSSR,
   setVirtualParent,
   setWarningCallback,
@@ -165,8 +175,16 @@ export {
   toMatrix,
   trProperties,
   unhoistMethods,
+  useAdoptedStylesheet,
+  useAdoptedStylesheetEx,
   useCustomizationSettings,
   useFocusRects,
+  useHasMergeStylesShadowRootContext,
+  useMergeStylesHooks,
+  useMergeStylesRootStylesheets,
+  useMergeStylesShadowRootContext,
+  useShadowConfig,
+  useStyled,
   values,
   videoProperties,
   warn,
@@ -176,13 +194,16 @@ export {
   warnMutuallyExclusive,
 } from '@fluentui/utilities';
 export type {
+  AdoptedStylesheetHook,
+  AdoptedStylesheetExHook,
   FitMode,
+  HasMergeStylesShadowRootContextHook,
   IAsAsyncOptions,
   IBaseProps,
   ICancelable,
   IChangeDescription,
   IChangeEventCallback,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   IClassNames,
   IClassNamesFunctionOptions,
   IComponentAs,
@@ -201,13 +222,15 @@ export type {
   IEventRecordList,
   IEventRecordsByName,
   IFitContentToBoundsOptions,
+  IFocusRectsContext,
   IObjectWithKey,
   IPerfData,
   IPerfMeasurement,
   IPerfSummary,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   IPoint,
   IPropsWithStyles,
+  IReactProps,
   IRectangle,
   IRefObject,
   IRenderComponent,
@@ -224,13 +247,15 @@ export type {
   IStyleFunctionOrObject,
   IVirtualElement,
   IWarnControlledUsageParams,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   Omit,
   Point,
   RefObject,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   Settings,
-  // eslint-disable-next-line deprecation/deprecation
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   SettingsFunction,
+  ShadowConfigHook,
   StyleFunction,
+  UseStyledHook,
 } from '@fluentui/utilities';

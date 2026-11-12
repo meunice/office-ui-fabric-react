@@ -1,15 +1,16 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`PeoplePicker renders correctly 1`] = `
 <div
-  className="ms-BasePicker"
-  onBlur={[Function]}
-  onFocus={[Function]}
-  onKeyDown={[Function]}
+  class=
+      ms-BasePicker
+      {
+        position: relative;
+      }
 >
   <div
     aria-live="assertive"
-    className=
+    class=
 
         {
           border: 0px;
@@ -28,28 +29,17 @@ exports[`PeoplePicker renders correctly 1`] = `
           width: 1px;
         }
     id="selected-suggestion-alert-id__0"
-  >
-    
-  </div>
+  />
   <span
-    hidden={true}
+    hidden=""
     id="selected-items-id__0-label"
   />
   <div
-    className="ms-SelectionZone"
-    onClick={[Function]}
-    onContextMenu={[Function]}
-    onDoubleClick={[Function]}
-    onFocusCapture={[Function]}
-    onKeyDown={[Function]}
-    onKeyDownCapture={[Function]}
-    onMouseDown={[Function]}
-    onMouseDownCapture={[Function]}
+    class="ms-SelectionZone"
     role="presentation"
   >
     <div
-      aria-owns=""
-      className=
+      class=
           ms-BasePicker-text
           {
             align-items: center;
@@ -67,14 +57,13 @@ exports[`PeoplePicker renders correctly 1`] = `
           }
     >
       <input
-        aria-activedescendant="sug-noResultsFound"
         aria-autocomplete="both"
-        aria-controls=""
-        aria-expanded={false}
+        aria-describedby=""
+        aria-expanded="false"
         aria-haspopup="listbox"
-        autoCapitalize="off"
-        autoComplete="off"
-        className=
+        autocapitalize="off"
+        autocomplete="off"
+        class=
             ms-BasePicker-input
             {
               -moz-osx-font-smoothing: grayscale;
@@ -98,6 +87,9 @@ exports[`PeoplePicker renders correctly 1`] = `
             &::-ms-clear {
               display: none;
             }
+            &:placeholder-shown {
+              text-overflow: ellipsis;
+            }
             &::placeholder {
               -moz-osx-font-smoothing: grayscale;
               -webkit-font-smoothing: antialiased;
@@ -107,7 +99,7 @@ exports[`PeoplePicker renders correctly 1`] = `
               font-weight: 400;
               opacity: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&::placeholder {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&::placeholder {
               color: GrayText;
             }
             &:-ms-input-placeholder {
@@ -119,7 +111,7 @@ exports[`PeoplePicker renders correctly 1`] = `
               font-weight: 400;
               opacity: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&:-ms-input-placeholder {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:-ms-input-placeholder {
               color: GrayText;
             }
             &::-ms-input-placeholder {
@@ -131,27 +123,14 @@ exports[`PeoplePicker renders correctly 1`] = `
               font-weight: 400;
               opacity: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&::-ms-input-placeholder {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&::-ms-input-placeholder {
               color: GrayText;
             }
-        data-lpignore={true}
+        data-lpignore="true"
         id="combobox-id__0"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onClick={[Function]}
-        onCompositionEnd={[Function]}
-        onCompositionStart={[Function]}
-        onCompositionUpdate={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
-        onKeyDown={[Function]}
         role="combobox"
-        spellCheck={false}
-        style={
-          Object {
-            "fontFamily": "inherit",
-          }
-        }
+        spellcheck="false"
+        style="font-family: inherit;"
         value=""
       />
     </div>
@@ -161,14 +140,15 @@ exports[`PeoplePicker renders correctly 1`] = `
 
 exports[`PeoplePicker renders correctly with preselected items 1`] = `
 <div
-  className="ms-BasePicker"
-  onBlur={[Function]}
-  onFocus={[Function]}
-  onKeyDown={[Function]}
+  class=
+      ms-BasePicker
+      {
+        position: relative;
+      }
 >
   <div
     aria-live="assertive"
-    className=
+    class=
 
         {
           border: 0px;
@@ -187,28 +167,17 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
           width: 1px;
         }
     id="selected-suggestion-alert-id__0"
-  >
-    
-  </div>
+  />
   <span
-    hidden={true}
+    hidden=""
     id="selected-items-id__0-label"
   />
   <div
-    className="ms-SelectionZone"
-    onClick={[Function]}
-    onContextMenu={[Function]}
-    onDoubleClick={[Function]}
-    onFocusCapture={[Function]}
-    onKeyDown={[Function]}
-    onKeyDownCapture={[Function]}
-    onMouseDown={[Function]}
-    onMouseDownCapture={[Function]}
+    class="ms-SelectionZone"
     role="presentation"
   >
     <div
-      aria-owns=""
-      className=
+      class=
           ms-BasePicker-text
           {
             align-items: center;
@@ -227,7 +196,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
     >
       <span
         aria-labelledby="selected-items-id__0-label"
-        className=
+        class=
             ms-BasePicker-itemsWrapper
             {
               display: flex;
@@ -238,7 +207,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
         role="list"
       >
         <div
-          className=
+          class=
               ms-PickerPersona-container
               {
                 align-items: center;
@@ -271,16 +240,28 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                 top: -1px;
                 z-index: 1;
               }
+              :host(.ms-Fabric--isFocusVisible) &:focus:after {
+                border: 1px solid #ffffff;
+                bottom: -1px;
+                content: "";
+                left: -1px;
+                outline: 1px solid #605e5c;
+                position: absolute;
+                right: -1px;
+                top: -1px;
+                z-index: 1;
+              }
               &:hover {
                 background: #edebe9;
               }
-              @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+              @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                 border: 1px solid WindowText;
               }
+          data-selection-index="0"
           role="listitem"
         >
           <div
-            className=
+            class=
                 ms-PickerItem-content
                 {
                   flex: 0 1 auto;
@@ -291,7 +272,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
             id="selectedItemPersona-id__9"
           >
             <div
-              className=
+              class=
                   ms-Persona
                   ms-Persona--size24
                   ms-Persona--online
@@ -301,7 +282,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                     align-items: center;
                     box-shadow: none;
                     box-sizing: border-box;
-                    color: #323130;
+                    color: inherit;
                     display: flex;
                     font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
                     font-size: 14px;
@@ -323,7 +304,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   }
             >
               <div
-                className=
+                class=
                     ms-Persona-coin
                     ms-Persona--size24
                     {
@@ -336,7 +317,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                 role="presentation"
               >
                 <div
-                  className=
+                  class=
                       ms-Persona-imageArea
                       {
                         flex: 0 0 auto;
@@ -348,7 +329,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   role="presentation"
                 >
                   <div
-                    className=
+                    class=
                         ms-Image
                         ms-Persona-image
                         {
@@ -368,16 +349,11 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                           top: 0px;
                           width: 24px;
                         }
-                    style={
-                      Object {
-                        "height": 24,
-                        "width": 24,
-                      }
-                    }
+                    style="width: 24px; height: 24px;"
                   >
                     <img
                       alt=""
-                      className=
+                      class=
                           ms-Image-image
                           ms-Image-image--cover
                           ms-Image-image--portrait
@@ -390,13 +366,11 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                             opacity: 0;
                             width: 100%;
                           }
-                      onError={[Function]}
-                      onLoad={[Function]}
-                      src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png"
+                      src="https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/office-ui-fabric-react-assets/persona-female.png"
                     />
                   </div>
                   <div
-                    className=
+                    class=
                         ms-Persona-presence
                         {
                           -ms-high-contrast-adjust: none;
@@ -414,7 +388,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                           top: auto;
                           width: 8px;
                         }
-                        @media screen and (-ms-high-contrast: active), (forced-colors: active){& {
+                        @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){& {
                           background-color: Highlight;
                           border-color: Window;
                         }
@@ -423,7 +397,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                 </div>
               </div>
               <div
-                className=
+                class=
                     ms-Persona-details
                     {
                       display: flex;
@@ -439,7 +413,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                     }
               >
                 <div
-                  className=
+                  class=
                       ms-Persona-primaryText
                       {
                         color: #323130;
@@ -455,23 +429,25 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   dir="auto"
                 >
                   <div
-                    className=
+                    class=
                         ms-TooltipHost
                         {
                           display: inline;
                         }
-                    onBlurCapture={[Function]}
-                    onFocusCapture={[Function]}
-                    onKeyDown={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
                     role="none"
                   >
                     Annie Lindqvist
+                    <div
+                      hidden=""
+                      id="tooltip2"
+                      style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0px; border: 0px; overflow: hidden; white-space: nowrap;"
+                    >
+                      Annie Lindqvist
+                    </div>
                   </div>
                 </div>
                 <div
-                  className=
+                  class=
                       ms-Persona-secondaryText
                       {
                         color: #605e5c;
@@ -485,23 +461,25 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   dir="auto"
                 >
                   <div
-                    className=
+                    class=
                         ms-TooltipHost
                         {
                           display: inline;
                         }
-                    onBlurCapture={[Function]}
-                    onFocusCapture={[Function]}
-                    onKeyDown={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
                     role="none"
                   >
                     Designer
+                    <div
+                      hidden=""
+                      id="tooltip3"
+                      style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0px; border: 0px; overflow: hidden; white-space: nowrap;"
+                    >
+                      Designer
+                    </div>
                   </div>
                 </div>
                 <div
-                  className=
+                  class=
                       ms-Persona-tertiaryText
                       {
                         color: #605e5c;
@@ -515,23 +493,25 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   dir="auto"
                 >
                   <div
-                    className=
+                    class=
                         ms-TooltipHost
                         {
                           display: inline;
                         }
-                    onBlurCapture={[Function]}
-                    onFocusCapture={[Function]}
-                    onKeyDown={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
                     role="none"
                   >
                     In a meeting
+                    <div
+                      hidden=""
+                      id="tooltip4"
+                      style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0px; border: 0px; overflow: hidden; white-space: nowrap;"
+                    >
+                      In a meeting
+                    </div>
                   </div>
                 </div>
                 <div
-                  className=
+                  class=
                       ms-Persona-optionalText
                       {
                         color: #605e5c;
@@ -545,19 +525,21 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   dir="auto"
                 >
                   <div
-                    className=
+                    class=
                         ms-TooltipHost
                         {
                           display: inline;
                         }
-                    onBlurCapture={[Function]}
-                    onFocusCapture={[Function]}
-                    onKeyDown={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
                     role="none"
                   >
                     Available at 4:00pm
+                    <div
+                      hidden=""
+                      id="tooltip5"
+                      style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0px; border: 0px; overflow: hidden; white-space: nowrap;"
+                    >
+                      Available at 4:00pm
+                    </div>
                   </div>
                 </div>
               </div>
@@ -565,25 +547,27 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
           </div>
           <button
             aria-labelledby="id__9 selectedItemPersona-id__9"
-            className=
+            class=
                 ms-Button
                 ms-Button--icon
                 ms-PickerItem-removeButton
                 {
                   -moz-osx-font-smoothing: grayscale;
                   -webkit-font-smoothing: antialiased;
+                  align-items: center;
                   background-color: transparent;
                   border-radius: 15px;
                   border: none;
                   box-sizing: border-box;
                   color: #323130;
                   cursor: pointer;
-                  display: inline-block;
+                  display: inline-flex;
                   flex: 0 0 auto;
                   font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
                   font-size: 14px;
                   font-weight: 400;
                   height: 24px;
+                  justify-content: center;
                   outline: transparent;
                   padding-bottom: 0;
                   padding-left: 4px;
@@ -609,14 +593,32 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   top: 2px;
                   z-index: 1;
                 }
-                @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+                @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
                   bottom: -2px;
                   left: -2px;
                   outline-color: ButtonText;
                   right: -2px;
                   top: -2px;
                 }
-                &:active > * {
+                :host(.ms-Fabric--isFocusVisible) &:focus:after {
+                  border: 1px solid transparent;
+                  bottom: 2px;
+                  content: "";
+                  left: 2px;
+                  outline: 1px solid #605e5c;
+                  position: absolute;
+                  right: 2px;
+                  top: 2px;
+                  z-index: 1;
+                }
+                @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+                  bottom: -2px;
+                  left: -2px;
+                  outline-color: ButtonText;
+                  right: -2px;
+                  top: -2px;
+                }
+                &:active > span {
                   left: 0px;
                   position: relative;
                   top: 0px;
@@ -626,7 +628,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   background: #c8c6c4;
                   color: #201f1e;
                 }
-                @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+                @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
                   border-color: Highlight;
                   color: Highlight;
                 }
@@ -634,19 +636,12 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                   background-color: #edebe9;
                   color: #005a9e;
                 }
-            data-is-focusable={true}
-            data-selection-index={0}
+            data-is-focusable="true"
             id="id__9"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            onKeyPress={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseUp={[Function]}
             type="button"
           >
             <span
-              className=
+              class=
                   ms-Button-flexContainer
                   {
                     align-items: center;
@@ -658,12 +653,13 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
               data-automationid="splitbuttonprimary"
             >
               <i
-                aria-hidden={true}
-                className=
+                aria-hidden="true"
+                class=
                     ms-Icon
                     ms-Button-icon
                     {
                       display: inline-block;
+                      text-decoration: inherit;
                     }
                     {
                       -moz-osx-font-smoothing: grayscale;
@@ -685,11 +681,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
                       text-align: center;
                     }
                 data-icon-name="Cancel"
-                style={
-                  Object {
-                    "fontFamily": "\\"FabricMDL2Icons\\"",
-                  }
-                }
+                style="font-family: \\"FabricMDL2Icons\\";"
               >
                 
               </i>
@@ -698,15 +690,13 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
         </div>
       </span>
       <input
-        aria-activedescendant="sug-noResultsFound"
         aria-autocomplete="both"
-        aria-controls=""
-        aria-describedby="selected-items-id__0"
-        aria-expanded={false}
+        aria-describedby="selected-items-id__0 "
+        aria-expanded="false"
         aria-haspopup="listbox"
-        autoCapitalize="off"
-        autoComplete="off"
-        className=
+        autocapitalize="off"
+        autocomplete="off"
+        class=
             ms-BasePicker-input
             {
               -moz-osx-font-smoothing: grayscale;
@@ -730,6 +720,9 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
             &::-ms-clear {
               display: none;
             }
+            &:placeholder-shown {
+              text-overflow: ellipsis;
+            }
             &::placeholder {
               -moz-osx-font-smoothing: grayscale;
               -webkit-font-smoothing: antialiased;
@@ -739,7 +732,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
               font-weight: 400;
               opacity: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&::placeholder {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&::placeholder {
               color: GrayText;
             }
             &:-ms-input-placeholder {
@@ -751,7 +744,7 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
               font-weight: 400;
               opacity: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&:-ms-input-placeholder {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:-ms-input-placeholder {
               color: GrayText;
             }
             &::-ms-input-placeholder {
@@ -763,27 +756,14 @@ exports[`PeoplePicker renders correctly with preselected items 1`] = `
               font-weight: 400;
               opacity: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&::-ms-input-placeholder {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&::-ms-input-placeholder {
               color: GrayText;
             }
-        data-lpignore={true}
+        data-lpignore="true"
         id="combobox-id__0"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onClick={[Function]}
-        onCompositionEnd={[Function]}
-        onCompositionStart={[Function]}
-        onCompositionUpdate={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
-        onKeyDown={[Function]}
         role="combobox"
-        spellCheck={false}
-        style={
-          Object {
-            "fontFamily": "inherit",
-          }
-        }
+        spellcheck="false"
+        style="font-family: inherit;"
         value=""
       />
     </div>

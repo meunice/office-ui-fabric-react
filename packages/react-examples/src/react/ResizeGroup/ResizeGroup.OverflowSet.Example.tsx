@@ -45,7 +45,7 @@ const generateData = (count: number, cachingEnabled: boolean, checked: boolean):
       key: `item${index}`,
       name: `Item ${index}`,
       icon: icons[index % icons.length],
-      checked: checked,
+      checked,
     };
     cacheKey = cacheKey + item.key;
     dataItems.push(item);
@@ -66,7 +66,6 @@ const computeCacheKey = (primaryControls: IContextualMenuItem[]): string => {
 
 const onRenderItem = (item: any) => (
   <CommandBarButton
-    role="menuitem"
     text={item.name}
     iconProps={{ iconName: item.icon }}
     onClick={item.onClick}
@@ -108,13 +107,12 @@ export const ResizeGroupOverflowSetExample: React.FunctionComponent = () => {
   };
 
   const onRenderOverflowButton = (overflowItems: any) => (
-    <CommandBarButton role="menuitem" menuProps={{ items: overflowItems! }} />
+    <CommandBarButton aria-label="more" menuProps={{ items: overflowItems! }} />
   );
 
   const onRenderData = (data: any) => {
     return (
       <OverflowSet
-        role="menubar"
         items={data.primary}
         overflowItems={data.overflow.length ? data.overflow : null}
         onRenderItem={onRenderItem}

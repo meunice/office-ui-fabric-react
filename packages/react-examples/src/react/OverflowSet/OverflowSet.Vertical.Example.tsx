@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CommandBarButton } from '@fluentui/react/lib/Button';
 import { IOverflowSetItemProps, OverflowSet } from '@fluentui/react/lib/OverflowSet';
 import { DirectionalHint, TooltipHost } from '@fluentui/react';
+import type { JSXElement } from '@fluentui/utilities';
 
 const noOp = () => undefined;
 
@@ -13,11 +14,10 @@ const onRenderOverflowButtonStyles = {
   menuIcon: { fontSize: '16px' },
 };
 
-const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
+const onRenderItem = (item: IOverflowSetItemProps): JSXElement => {
   return (
     <TooltipHost content={item.title} directionalHint={DirectionalHint.rightCenter}>
       <CommandBarButton
-        role="menuitem"
         aria-label={item.name}
         styles={onRenderItemStyles}
         iconProps={{ iconName: item.icon }}
@@ -27,11 +27,10 @@ const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
   );
 };
 
-const onRenderOverflowButton = (overflowItems: any[] | undefined): JSX.Element => {
+const onRenderOverflowButton = (overflowItems: any[] | undefined): JSXElement => {
   return (
     <TooltipHost content="More items" directionalHint={DirectionalHint.rightCenter}>
       <CommandBarButton
-        role="menuitem"
         aria-label="More items"
         styles={onRenderOverflowButtonStyles}
         menuIconProps={{ iconName: 'More' }}
@@ -44,7 +43,6 @@ const onRenderOverflowButton = (overflowItems: any[] | undefined): JSX.Element =
 export const OverflowSetVerticalExample: React.FunctionComponent = () => (
   <OverflowSet
     aria-label="Vertical Example"
-    role="menubar"
     vertical
     items={[
       {

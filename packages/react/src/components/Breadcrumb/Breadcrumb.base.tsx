@@ -23,6 +23,9 @@ import type {
   IBreadcrumbStyleProps,
   IBreadcrumbStyles,
 } from './Breadcrumb.types';
+import { composeRenderFunction } from '../../Utilities';
+
+import type { JSXElement } from '@fluentui/utilities';
 
 /** @deprecated Use IBreadcrumbData */
 export type IBreadCrumbData = IBreadcrumbData;
@@ -76,7 +79,7 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
     }
   }
 
-  public render(): JSX.Element {
+  public render(): JSXElement {
     this._validateProps(this.props);
 
     const {
@@ -158,7 +161,7 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
     const {
       ariaLabel,
       dividerAs: DividerType = Icon as React.ElementType<IDividerAsProps>,
-      onRenderItem = this._onRenderItem,
+      onRenderItem,
       overflowAriaLabel,
       overflowIndex,
       onRenderOverflowIcon,
@@ -166,38 +169,48 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
     } = data.props;
     const { renderedOverflowItems, renderedItems } = data;
 
-    const contextualItems = renderedOverflowItems.map(
-      (item): IContextualMenuItem => {
-        const isActionable = !!(item.onClick || item.href);
-        return {
-          text: item.text,
-          name: item.text,
-          key: item.key,
-          onClick: item.onClick ? this._onBreadcrumbClicked.bind(this, item) : null,
-          href: item.href,
-          disabled: !isActionable,
-          itemProps: isActionable ? undefined : nonActionableItemProps,
-        };
-      },
-    );
+    const contextualItems = renderedOverflowItems.map((item): IContextualMenuItem => {
+      const isActionable = !!(item.onClick || item.href);
+      return {
+        text: item.text,
+        name: item.text,
+        key: item.key,
+        onClick: item.onClick ? this._onBreadcrumbClicked.bind(this, item) : null,
+        href: item.href,
+        disabled: !isActionable,
+        itemProps: isActionable ? undefined : nonActionableItemProps,
+      };
+    });
 
     // Find index of last rendered item so the divider icon
     // knows not to render on that item
     const lastItemIndex = renderedItems.length - 1;
     const hasOverflowItems = renderedOverflowItems && renderedOverflowItems.length !== 0;
 
-    const itemElements: JSX.Element[] = renderedItems.map((item, index) => (
-      <li className={this._classNames.listItem} key={item.key || String(index)}>
-        {onRenderItem(item, this._onRenderItem)}
-        {(index !== lastItemIndex || (hasOverflowItems && index === overflowIndex! - 1)) && (
-          <DividerType
-            className={this._classNames.chevron}
-            iconName={getRTL(this.props.theme) ? 'ChevronLeft' : 'ChevronRight'}
-            item={item}
-          />
-        )}
-      </li>
-    ));
+    const itemElements: JSXElement[] = renderedItems.map((item, index) => {
+      let finalOnRenderItem = this._onRenderItem;
+
+      if (item.onRender) {
+        finalOnRenderItem = composeRenderFunction(item.onRender, finalOnRenderItem);
+      }
+
+      if (onRenderItem) {
+        finalOnRenderItem = composeRenderFunction(onRenderItem, finalOnRenderItem);
+      }
+
+      return (
+        <li className={this._classNames.listItem} key={item.key || String(index)}>
+          {finalOnRenderItem(item)}
+          {(index !== lastItemIndex || (hasOverflowItems && index === overflowIndex! - 1)) && (
+            <DividerType
+              className={this._classNames.chevron}
+              iconName={getRTL(this.props.theme) ? 'ChevronLeft' : 'ChevronRight'}
+              item={item}
+            />
+          )}
+        </li>
+      );
+    });
 
     if (hasOverflowItems) {
       const iconProps = !onRenderOverflowIcon ? { iconName: 'More' } : {};
@@ -248,8 +261,22 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
     );
   };
 
-  private _onRenderItem = (item: IBreadcrumbItem) => {
-    const { as, href, onClick, isCurrentItem, text, ...additionalProps } = item;
+  private _onRenderItem = (item?: IBreadcrumbItem) => {
+    if (!item) {
+      return null;
+    }
+
+    const { as, href, onClick, isCurrentItem, text, onRenderContent, ...additionalProps } = item;
+
+    let finalOnRenderContent = defaultOnRenderCrumbContent;
+
+    if (onRenderContent) {
+      finalOnRenderContent = composeRenderFunction(onRenderContent, finalOnRenderContent);
+    }
+
+    if (this.props.onRenderItemContent) {
+      finalOnRenderContent = composeRenderFunction(this.props.onRenderItemContent, finalOnRenderContent);
+    }
 
     if (onClick || href) {
       return (
@@ -263,7 +290,7 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
           onClick={this._onBreadcrumbClicked.bind(this, item)}
         >
           <TooltipHost content={text} overflowMode={TooltipOverflowMode.Parent} {...this.props.tooltipHostProps}>
-            {text}
+            {finalOnRenderContent(item)}
           </TooltipHost>
         </Link>
       );
@@ -272,7 +299,7 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
       return (
         <Tag {...additionalProps} className={this._classNames.item}>
           <TooltipHost content={text} overflowMode={TooltipOverflowMode.Parent} {...this.props.tooltipHostProps}>
-            {text}
+            {finalOnRenderContent(item)}
           </TooltipHost>
         </Tag>
       );
@@ -299,4 +326,8 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
       throw new Error('Breadcrumb: overflowIndex out of range');
     }
   }
+}
+
+function defaultOnRenderCrumbContent(item?: IBreadcrumbItem): JSXElement | null {
+  return item ? <>{item.text}</> : null;
 }

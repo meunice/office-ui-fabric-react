@@ -1,25 +1,30 @@
+import '@testing-library/jest-dom';
+
 import * as React from 'react';
-import { create } from '@fluentui/utilities/lib/test';
-import { mount } from 'enzyme';
+import { render, cleanup } from '@testing-library/react';
 import { resetIds } from '@fluentui/utilities';
-import { Pivot, PivotItem } from './index';
+import { Pivot, PivotItem, IPivot } from './index';
 import { isConformant } from '../../common/isConformant';
-import type { IPivot } from './index';
 
 describe('Pivot', () => {
   beforeEach(() => {
     // Resetting ids to create predictability in generated ids.
     resetIds();
   });
+
+  afterEach(() => {
+    cleanup();
+    delete (HTMLElement.prototype as any).isVisible;
+  });
+
   it('renders link Pivot correctly', () => {
-    const component = create(
+    const { container } = render(
       <Pivot>
         <PivotItem headerText="Test Link 1" />
         <PivotItem headerText="" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   isConformant({
@@ -29,30 +34,27 @@ describe('Pivot', () => {
 
   it('can be focused', () => {
     const pivotRef = React.createRef<IPivot>();
+    (HTMLElement.prototype as any).isVisible = true;
 
-    mount(
+    const { unmount } = render(
       <Pivot componentRef={pivotRef}>
         <PivotItem headerText="Link 1" />
         <PivotItem headerText="Link 2" />
       </Pivot>,
     );
 
-    // Instruct FocusZone to treat all elements as visible.
-    (HTMLElement.prototype as any).isVisible = true;
+    expect(pivotRef.current).toBeTruthy();
 
-    try {
-      expect(pivotRef.current).toBeTruthy();
+    pivotRef.current!.focus();
+    const active = document.activeElement;
+    expect(active?.textContent?.trim()).toEqual('Link 1');
 
-      pivotRef.current!.focus();
-      expect(document.activeElement).toBeTruthy();
-      expect(document.activeElement!.textContent?.trim()).toEqual('Link 1');
-    } finally {
-      delete (HTMLElement.prototype as any).isVisible;
-    }
+    delete (HTMLElement.prototype as any).isVisible;
+    unmount();
   });
 
   it('supports JSX expressions', () => {
-    const component = create(
+    const { container } = render(
       <Pivot defaultSelectedKey="1">
         <PivotItem headerText="Test Link 1">
           <div>This is item 1</div>
@@ -63,90 +65,90 @@ describe('Pivot', () => {
         </PivotItem>
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('renders large link Pivot correctly', () => {
-    const component = create(
+    const { container } = render(
       <Pivot linkSize="large">
         <PivotItem headerText="Test Link 1" />
         <PivotItem headerText="" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('renders tabbed Pivot correctly', () => {
-    const component = create(
+    const { container } = render(
       <Pivot linkFormat="tabs">
         <PivotItem headerText="Test Link 1" />
         <PivotItem headerText="" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('renders large tabbed Pivot correctly', () => {
-    const component = create(
+    const { container } = render(
       <Pivot linkFormat="tabs" linkSize="large">
         <PivotItem headerText="Test Link 1" />
         <PivotItem headerText="" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('renders Pivot correctly with custom className', () => {
-    const component = create(
+    const { container } = render(
       <Pivot className="specialClassName">
         <PivotItem headerText="Test Link 1" className="specialClassName" />
         <PivotItem headerText="Test Link 2" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('renders Pivot correctly with icon, text and count', () => {
-    const component = create(
+    const { container } = render(
       <Pivot>
         <PivotItem itemCount={12} />
         <PivotItem headerText="Test Link" itemCount={12} />
         <PivotItem headerText="Text with icon" itemIcon="Recent" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('renders Pivot correctly when itemCount is a string', () => {
-    const component = create(
+    const { container } = render(
       <Pivot>
         <PivotItem headerText="test" />
         <PivotItem headerText="Test Link" itemCount="20+" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('renders Pivot with overflow', () => {
-    const component = create(
+    const { container } = render(
       <Pivot overflowBehavior="menu">
         <PivotItem headerText="Test 1" />
         <PivotItem headerText="Test 2" />
       </Pivot>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
+
   it('passes aria-label and aria-labelledby to tablist', () => {
-    const wrapper = mount(
+    const { getByRole } = render(
       <Pivot aria-label="test label" aria-labelledby="testID" data-foo="not passed to tablist">
         <PivotItem headerText="Test Link 1" />
         <PivotItem headerText="" />
       </Pivot>,
     );
-    const tablistElement = wrapper.find('div[role="tablist"]');
-    expect(tablistElement.prop('aria-label')).toBe('test label');
-    expect(tablistElement.prop('aria-labelledby')).toBe('testID');
-    expect(tablistElement.prop('data-foo')).toBeUndefined();
+    const tablist = getByRole('tablist');
+    expect(tablist).toHaveAttribute('aria-label', 'test label');
+    expect(tablist).toHaveAttribute('aria-labelledby', 'testID');
+    expect(tablist).not.toHaveAttribute('data-foo');
   });
 });

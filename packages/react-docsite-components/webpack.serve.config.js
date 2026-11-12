@@ -1,4 +1,5 @@
-const resources = require('../../scripts/webpack/webpack-resources');
+const path = require('node:path');
+const { resources } = require('@fluentui/scripts-webpack');
 
 module.exports = resources.createServeConfig({
   entry: ['react-app-polyfill/ie11', './src/index.demo.tsx'],
@@ -6,9 +7,11 @@ module.exports = resources.createServeConfig({
   output: {
     filename: 'demo-app.js',
   },
-
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
+  resolve: {
+    alias: {
+      // react-monaco-editor dynamically loads @types/react via proprietary webpack require.ensure,
+      // this doesn't work starting @types/react@17.0.48 as the types package introduced Export Maps
+      '@types/react/index.d.ts': path.resolve(__dirname, '../../node_modules/@types/react/index.d.ts'),
+    },
   },
 });

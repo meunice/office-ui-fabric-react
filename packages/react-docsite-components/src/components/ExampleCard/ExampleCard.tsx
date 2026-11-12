@@ -74,9 +74,10 @@ export class ExampleCardBase extends React.Component<IExampleCardProps, IExample
     }
   }
 
-  public render(): JSX.Element {
+  public render(): React.ReactElement {
     const {
       title,
+      titleAs: TitleAs = 'h3',
       children,
       styles,
       isRightAligned = false,
@@ -113,7 +114,7 @@ export class ExampleCardBase extends React.Component<IExampleCardProps, IExample
           return (
             <div className={css(classNames.root, isCodeVisible && 'is-codeVisible')}>
               <div className={classNames.header}>
-                <span className={classNames.title}>{title}</span>
+                <TitleAs className={classNames.title}>{title}</TitleAs>
                 <div className={classNames.toggleButtons}>
                   {(codepenJS || this._transformedInitialCode) && (
                     <CodepenComponent
@@ -163,7 +164,7 @@ export class ExampleCardBase extends React.Component<IExampleCardProps, IExample
                   editorAriaLabel={`Editor for the example "${title}". The example will be updated as you type.`}
                   modelRef={this._monacoModelRef}
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  previewAs={(ExamplePreview as any) as React.FunctionComponent<{}>}
+                  previewAs={ExamplePreview as any as React.FunctionComponent<{}>}
                 >
                   {children}
                 </EditorWrapper>
@@ -184,7 +185,7 @@ export class ExampleCardBase extends React.Component<IExampleCardProps, IExample
     );
   }
 
-  private _getDosAndDonts(): JSX.Element | void {
+  private _getDosAndDonts(): React.ReactElement | undefined {
     const classNames = this._classNames;
     if (this.props.dos && this.props.donts) {
       return (
@@ -204,7 +205,7 @@ export class ExampleCardBase extends React.Component<IExampleCardProps, IExample
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   private _getPreviewComponent = memoizeFunction(
-    (activeTheme: Theme | undefined, scheme: ISchemeNames): React.FunctionComponent => {
+    (activeTheme: Theme | undefined, scheme: ISchemeNames): React.FunctionComponent<React.PropsWithChildren> => {
       // Generate a component which renders the children with the current
       return props => {
         const { children } = props;

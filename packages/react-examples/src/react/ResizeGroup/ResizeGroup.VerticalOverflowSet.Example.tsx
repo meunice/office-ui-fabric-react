@@ -24,7 +24,7 @@ const generateData = (count: number, cachingEnabled: boolean, checked: boolean):
       key: `item${index}`,
       name: `Item ${index}`,
       icon: icons[index % icons.length],
-      checked: checked,
+      checked,
     };
   });
   let result: IOverflowData = {
@@ -51,7 +51,6 @@ const dataToRender = generateData(20, false, false);
 
 const onRenderItem = (item: any) => (
   <CommandBarButton
-    role="menuitem"
     text={item.name}
     iconProps={{ iconName: item.icon }}
     onClick={item.onClick}
@@ -62,7 +61,7 @@ const onRenderItem = (item: any) => (
 
 const onRenderOverflowButton = (overflowItems: any) => (
   <CommandBarButton
-    role="menuitem"
+    aria-label="more"
     styles={buttonStyles}
     menuIconProps={{ iconName: 'ChevronRight' }}
     menuProps={{ items: overflowItems!, directionalHint: DirectionalHint.rightCenter }}
@@ -71,7 +70,6 @@ const onRenderOverflowButton = (overflowItems: any) => (
 
 const onRenderData = (data: any) => (
   <OverflowSet
-    role="menubar"
     vertical
     items={data.primary}
     overflowItems={data.overflow.length ? data.overflow : null}

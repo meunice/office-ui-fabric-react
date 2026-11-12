@@ -3,9 +3,7 @@ import { Customizer } from '@fluentui/utilities';
 import { createTheme } from '@fluentui/theme';
 import { loadTheme } from '@fluentui/style-utilities';
 import { Stylesheet, InjectionMode } from '@fluentui/merge-styles';
-import { safeMount } from '@fluentui/test-utilities';
-import { mount, ReactWrapper } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { render, act } from '@testing-library/react';
 import { makeStyles } from './makeStyles';
 import { ThemeProvider } from './ThemeProvider';
 
@@ -62,7 +60,7 @@ describe('makeStyles', () => {
   });
 
   it('can refer to styles from the default theme', () => {
-    safeMount(<ThemeStyledComponent />);
+    render(<ThemeStyledComponent />);
     expect(stylesheet.getRules()).toEqual('.root-0{background:#0078d4;}');
   });
 
@@ -73,8 +71,7 @@ describe('makeStyles', () => {
       },
     });
 
-    safeMount(
-      // eslint-disable-next-line deprecation/deprecation
+    render(
       <Customizer settings={{ theme: customTheme }}>
         <ThemeStyledComponent />
       </Customizer>,
@@ -83,19 +80,20 @@ describe('makeStyles', () => {
   });
 
   it('can render static styles', () => {
-    safeMount(<StaticStyledComponent />);
+    render(<StaticStyledComponent />);
     expect(stylesheet.getRules()).toEqual('.root-0{background:yellow;}');
   });
 
   it('can update when loadTheme is called', () => {
-    let wrapper: ReactWrapper;
+    let unmount: (() => void) | undefined;
 
     act(() => {
-      wrapper = mount(
+      const { unmount: renderedUnmount } = render(
         <ThemeProvider>
           <ThemeStyledComponent />
         </ThemeProvider>,
       );
+      unmount = renderedUnmount;
     });
 
     const rules = stylesheet.getRules();
@@ -106,6 +104,8 @@ describe('makeStyles', () => {
 
     expect(stylesheet.getRules()).not.toEqual(rules);
 
-    wrapper!.unmount();
+    if (unmount) {
+      unmount();
+    }
   });
 });

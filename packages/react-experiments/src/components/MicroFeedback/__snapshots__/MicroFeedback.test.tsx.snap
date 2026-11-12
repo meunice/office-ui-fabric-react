@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`MicroFeedback renders correctly with inline prop set 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         box-sizing: border-box;
@@ -19,15 +19,9 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-top: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
 >
   <div
-    className=
+    class=
         ms-Stack
         {
           box-sizing: border-box;
@@ -41,32 +35,28 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
         & > * {
           text-overflow: ellipsis;
         }
-        & > *:not(:first-child) {
-          margin-left: 0px;
-        }
-        & > *:not(.ms-StackItem) {
-          flex-shrink: 1;
-        }
   >
     <div>
       <button
-        className=
+        class=
             ms-Button
             ms-Button--icon
             {
               -moz-osx-font-smoothing: grayscale;
               -webkit-font-smoothing: antialiased;
+              align-items: center;
               background-color: transparent;
               border-radius: 2px;
               border: none;
               box-sizing: border-box;
               color: #0078d4;
               cursor: pointer;
-              display: inline-block;
+              display: inline-flex;
               font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
               font-size: 14px;
               font-weight: 400;
               height: 32px;
+              justify-content: center;
               outline: transparent;
               padding-bottom: 0;
               padding-left: 4px;
@@ -92,14 +82,32 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
               top: 2px;
               z-index: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
               bottom: -2px;
               left: -2px;
               outline-color: ButtonText;
               right: -2px;
               top: -2px;
             }
-            &:active > * {
+            :host(.ms-Fabric--isFocusVisible) &:focus:after {
+              border: 1px solid transparent;
+              bottom: 2px;
+              content: "";
+              left: 2px;
+              outline: 1px solid #605e5c;
+              position: absolute;
+              right: 2px;
+              top: 2px;
+              z-index: 1;
+            }
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+              bottom: -2px;
+              left: -2px;
+              outline-color: ButtonText;
+              right: -2px;
+              top: -2px;
+            }
+            &:active > span {
               left: 0px;
               position: relative;
               top: 0px;
@@ -108,7 +116,7 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
               background-color: #f3f2f1;
               color: #106ebe;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
               border-color: Highlight;
               color: Highlight;
             }
@@ -116,17 +124,11 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
               background-color: #edebe9;
               color: #005a9e;
             }
-        data-is-focusable={true}
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseUp={[Function]}
+        data-is-focusable="true"
         type="button"
       >
         <span
-          className=
+          class=
               ms-Button-flexContainer
               {
                 align-items: center;
@@ -138,12 +140,13 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
           data-automationid="splitbuttonprimary"
         >
           <i
-            aria-hidden={true}
-            className=
+            aria-hidden="true"
+            class=
                 ms-Icon
                 ms-Button-menuIcon
                 {
                   display: inline-block;
+                  text-decoration: inherit;
                 }
                 {
                   -moz-osx-font-smoothing: grayscale;
@@ -165,11 +168,7 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
                   text-align: center;
                 }
             data-icon-name="Like"
-            style={
-              Object {
-                "fontFamily": "\\"FabricMDL2Icons-2\\"",
-              }
-            }
+            style="font-family: \\"FabricMDL2Icons-2\\";"
           >
             
           </i>
@@ -178,23 +177,25 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
     </div>
     <div>
       <button
-        className=
+        class=
             ms-Button
             ms-Button--icon
             {
               -moz-osx-font-smoothing: grayscale;
               -webkit-font-smoothing: antialiased;
+              align-items: center;
               background-color: transparent;
               border-radius: 2px;
               border: none;
               box-sizing: border-box;
               color: #0078d4;
               cursor: pointer;
-              display: inline-block;
+              display: inline-flex;
               font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
               font-size: 14px;
               font-weight: 400;
               height: 32px;
+              justify-content: center;
               outline: transparent;
               padding-bottom: 0;
               padding-left: 4px;
@@ -220,14 +221,32 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
               top: 2px;
               z-index: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
               bottom: -2px;
               left: -2px;
               outline-color: ButtonText;
               right: -2px;
               top: -2px;
             }
-            &:active > * {
+            :host(.ms-Fabric--isFocusVisible) &:focus:after {
+              border: 1px solid transparent;
+              bottom: 2px;
+              content: "";
+              left: 2px;
+              outline: 1px solid #605e5c;
+              position: absolute;
+              right: 2px;
+              top: 2px;
+              z-index: 1;
+            }
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+              bottom: -2px;
+              left: -2px;
+              outline-color: ButtonText;
+              right: -2px;
+              top: -2px;
+            }
+            &:active > span {
               left: 0px;
               position: relative;
               top: 0px;
@@ -236,7 +255,7 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
               background-color: #f3f2f1;
               color: #106ebe;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
               border-color: Highlight;
               color: Highlight;
             }
@@ -244,17 +263,11 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
               background-color: #edebe9;
               color: #005a9e;
             }
-        data-is-focusable={true}
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseUp={[Function]}
+        data-is-focusable="true"
         type="button"
       >
         <span
-          className=
+          class=
               ms-Button-flexContainer
               {
                 align-items: center;
@@ -266,12 +279,13 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
           data-automationid="splitbuttonprimary"
         >
           <i
-            aria-hidden={true}
-            className=
+            aria-hidden="true"
+            class=
                 ms-Icon
                 ms-Button-menuIcon
                 {
                   display: inline-block;
+                  text-decoration: inherit;
                 }
                 {
                   -moz-osx-font-smoothing: grayscale;
@@ -293,11 +307,7 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
                   text-align: center;
                 }
             data-icon-name="Dislike"
-            style={
-              Object {
-                "fontFamily": "\\"FabricMDL2Icons-2\\"",
-              }
-            }
+            style="font-family: \\"FabricMDL2Icons-2\\";"
           >
             
           </i>
@@ -310,7 +320,7 @@ exports[`MicroFeedback renders correctly with inline prop set 1`] = `
 
 exports[`MicroFeedback renders correctly with no props 1`] = `
 <div
-  className=
+  class=
       ms-Stack
       {
         box-sizing: border-box;
@@ -327,15 +337,9 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
       & > * {
         text-overflow: ellipsis;
       }
-      & > *:not(:first-child) {
-        margin-top: 0px;
-      }
-      & > *:not(.ms-StackItem) {
-        flex-shrink: 1;
-      }
 >
   <div
-    className=
+    class=
         ms-Stack
         {
           box-sizing: border-box;
@@ -349,32 +353,28 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
         & > * {
           text-overflow: ellipsis;
         }
-        & > *:not(:first-child) {
-          margin-left: 0px;
-        }
-        & > *:not(.ms-StackItem) {
-          flex-shrink: 1;
-        }
   >
     <div>
       <button
-        className=
+        class=
             ms-Button
             ms-Button--icon
             {
               -moz-osx-font-smoothing: grayscale;
               -webkit-font-smoothing: antialiased;
+              align-items: center;
               background-color: transparent;
               border-radius: 2px;
               border: none;
               box-sizing: border-box;
               color: #0078d4;
               cursor: pointer;
-              display: inline-block;
+              display: inline-flex;
               font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
               font-size: 14px;
               font-weight: 400;
               height: 32px;
+              justify-content: center;
               outline: transparent;
               padding-bottom: 0;
               padding-left: 4px;
@@ -400,14 +400,32 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
               top: 2px;
               z-index: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
               bottom: -2px;
               left: -2px;
               outline-color: ButtonText;
               right: -2px;
               top: -2px;
             }
-            &:active > * {
+            :host(.ms-Fabric--isFocusVisible) &:focus:after {
+              border: 1px solid transparent;
+              bottom: 2px;
+              content: "";
+              left: 2px;
+              outline: 1px solid #605e5c;
+              position: absolute;
+              right: 2px;
+              top: 2px;
+              z-index: 1;
+            }
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+              bottom: -2px;
+              left: -2px;
+              outline-color: ButtonText;
+              right: -2px;
+              top: -2px;
+            }
+            &:active > span {
               left: 0px;
               position: relative;
               top: 0px;
@@ -416,7 +434,7 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
               background-color: #f3f2f1;
               color: #106ebe;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
               border-color: Highlight;
               color: Highlight;
             }
@@ -424,17 +442,11 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
               background-color: #edebe9;
               color: #005a9e;
             }
-        data-is-focusable={true}
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseUp={[Function]}
+        data-is-focusable="true"
         type="button"
       >
         <span
-          className=
+          class=
               ms-Button-flexContainer
               {
                 align-items: center;
@@ -446,12 +458,13 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
           data-automationid="splitbuttonprimary"
         >
           <i
-            aria-hidden={true}
-            className=
+            aria-hidden="true"
+            class=
                 ms-Icon
                 ms-Button-menuIcon
                 {
                   display: inline-block;
+                  text-decoration: inherit;
                 }
                 {
                   -moz-osx-font-smoothing: grayscale;
@@ -473,11 +486,7 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
                   text-align: center;
                 }
             data-icon-name="Like"
-            style={
-              Object {
-                "fontFamily": "\\"FabricMDL2Icons-2\\"",
-              }
-            }
+            style="font-family: \\"FabricMDL2Icons-2\\";"
           >
             
           </i>
@@ -486,23 +495,25 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
     </div>
     <div>
       <button
-        className=
+        class=
             ms-Button
             ms-Button--icon
             {
               -moz-osx-font-smoothing: grayscale;
               -webkit-font-smoothing: antialiased;
+              align-items: center;
               background-color: transparent;
               border-radius: 2px;
               border: none;
               box-sizing: border-box;
               color: #0078d4;
               cursor: pointer;
-              display: inline-block;
+              display: inline-flex;
               font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
               font-size: 14px;
               font-weight: 400;
               height: 32px;
+              justify-content: center;
               outline: transparent;
               padding-bottom: 0;
               padding-left: 4px;
@@ -528,14 +539,32 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
               top: 2px;
               z-index: 1;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){.ms-Fabric--isFocusVisible &:focus:after {
               bottom: -2px;
               left: -2px;
               outline-color: ButtonText;
               right: -2px;
               top: -2px;
             }
-            &:active > * {
+            :host(.ms-Fabric--isFocusVisible) &:focus:after {
+              border: 1px solid transparent;
+              bottom: 2px;
+              content: "";
+              left: 2px;
+              outline: 1px solid #605e5c;
+              position: absolute;
+              right: 2px;
+              top: 2px;
+              z-index: 1;
+            }
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){:host(.ms-Fabric--isFocusVisible) &:focus:after {
+              bottom: -2px;
+              left: -2px;
+              outline-color: ButtonText;
+              right: -2px;
+              top: -2px;
+            }
+            &:active > span {
               left: 0px;
               position: relative;
               top: 0px;
@@ -544,7 +573,7 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
               background-color: #f3f2f1;
               color: #106ebe;
             }
-            @media screen and (-ms-high-contrast: active), (forced-colors: active){&:hover {
+            @media screen and (-ms-high-contrast: active), screen and (forced-colors: active){&:hover {
               border-color: Highlight;
               color: Highlight;
             }
@@ -552,17 +581,11 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
               background-color: #edebe9;
               color: #005a9e;
             }
-        data-is-focusable={true}
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseUp={[Function]}
+        data-is-focusable="true"
         type="button"
       >
         <span
-          className=
+          class=
               ms-Button-flexContainer
               {
                 align-items: center;
@@ -574,12 +597,13 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
           data-automationid="splitbuttonprimary"
         >
           <i
-            aria-hidden={true}
-            className=
+            aria-hidden="true"
+            class=
                 ms-Icon
                 ms-Button-menuIcon
                 {
                   display: inline-block;
+                  text-decoration: inherit;
                 }
                 {
                   -moz-osx-font-smoothing: grayscale;
@@ -601,11 +625,7 @@ exports[`MicroFeedback renders correctly with no props 1`] = `
                   text-align: center;
                 }
             data-icon-name="Dislike"
-            style={
-              Object {
-                "fontFamily": "\\"FabricMDL2Icons-2\\"",
-              }
-            }
+            style="font-family: \\"FabricMDL2Icons-2\\";"
           >
             
           </i>

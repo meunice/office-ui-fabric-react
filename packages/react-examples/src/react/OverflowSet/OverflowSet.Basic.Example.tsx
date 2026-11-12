@@ -2,18 +2,19 @@ import * as React from 'react';
 import { IconButton, IButtonStyles } from '@fluentui/react/lib/Button';
 import { Link } from '@fluentui/react/lib/Link';
 import { IOverflowSetItemProps, OverflowSet } from '@fluentui/react/lib/OverflowSet';
+import type { JSXElement } from '@fluentui/utilities';
 
 const noOp = () => undefined;
 
-const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
+const onRenderItem = (item: IOverflowSetItemProps): JSXElement => {
   return (
-    <Link role="menuitem" styles={{ root: { marginRight: 10 } }} onClick={item.onClick}>
+    <Link styles={{ root: { marginRight: 10 } }} onClick={item.onClick}>
       {item.name}
     </Link>
   );
 };
 
-const onRenderOverflowButton = (overflowItems: any[] | undefined): JSX.Element => {
+const onRenderOverflowButton = (overflowItems: any[] | undefined): JSXElement => {
   const buttonStyles: Partial<IButtonStyles> = {
     root: {
       minWidth: 0,
@@ -24,7 +25,6 @@ const onRenderOverflowButton = (overflowItems: any[] | undefined): JSX.Element =
   };
   return (
     <IconButton
-      role="menuitem"
       title="More options"
       styles={buttonStyles}
       menuIconProps={{ iconName: 'More' }}
@@ -36,7 +36,6 @@ const onRenderOverflowButton = (overflowItems: any[] | undefined): JSX.Element =
 export const OverflowSetBasicExample: React.FunctionComponent = () => (
   <OverflowSet
     aria-label="Basic Menu Example"
-    role="menubar"
     items={[
       {
         key: 'item1',

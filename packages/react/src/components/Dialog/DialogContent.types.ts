@@ -5,6 +5,8 @@ import type { IButtonProps } from '../../Button';
 import type { IStyle, ITheme } from '../../Styling';
 import type { IRefObject, IStyleFunctionOrObject } from '../../Utilities';
 
+import type { JSXElement } from '@fluentui/utilities';
+
 /**
  * {@docCategory Dialog}
  */
@@ -14,6 +16,8 @@ export interface IDialogContent {}
  * {@docCategory Dialog}
  */
 export interface IDialogContentProps extends React.ClassAttributes<DialogContentBase> {
+  children?: React.ReactNode;
+
   /**
    * Optional callback to access the IDialogContent interface. Use this instead of ref for accessing
    * the public methods and properties of the component.
@@ -75,7 +79,8 @@ export interface IDialogContentProps extends React.ClassAttributes<DialogContent
   /**
    * The title text to display at the top of the dialog.
    */
-  title?: string | JSX.Element;
+
+  title?: string | JSXElement;
 
   /**
    * The props for title container.

@@ -69,10 +69,10 @@ export const CommandBarButtonAsExample: React.FunctionComponent = () => {
       overflowButtonProps={overflowProps}
       // Custom render all buttons
       buttonAs={CustomButton}
+      ariaLabel="CommandBar example with custom buttons"
       items={_items}
       overflowItems={_overflowItems}
       farItems={_farItems}
-      ariaLabel="Use left and right arrow keys to navigate between commands"
     />
   );
 };

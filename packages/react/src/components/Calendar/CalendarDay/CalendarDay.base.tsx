@@ -8,6 +8,8 @@ import type { ICalendarDayProps, ICalendarDayStyleProps, ICalendarDayStyles } fr
 import type { IProcessedStyleSet } from '@fluentui/style-utilities';
 import type { ICalendarDayGrid } from '../../CalendarDayGrid/CalendarDayGrid.types';
 
+import type { JSXElement } from '@fluentui/utilities';
+
 const getClassNames = classNamesFunction<ICalendarDayStyleProps, ICalendarDayStyles>();
 
 export const CalendarDayBase: React.FunctionComponent<ICalendarDayProps> = props => {
@@ -44,10 +46,10 @@ export const CalendarDayBase: React.FunctionComponent<ICalendarDayProps> = props
 
   const classNames = getClassNames(styles, {
     theme: theme!,
-    className: className,
+    className,
     headerIsClickable: !!onHeaderSelect,
-    showWeekNumbers: showWeekNumbers,
-    animationDirection: animationDirection,
+    showWeekNumbers,
+    animationDirection,
   });
 
   const monthAndYear = dateTimeFormatter.formatMonthYear(navigatedDate, strings);
@@ -60,11 +62,7 @@ export const CalendarDayBase: React.FunctionComponent<ICalendarDayProps> = props
     <div className={classNames.root}>
       <div className={classNames.header}>
         <HeaderButtonComponentType
-          // if this component rerenders when text changes, aria-live will not be announced, so make key consistent
-          aria-live="polite"
-          aria-atomic="true"
           aria-label={onHeaderSelect ? headerAriaLabel : undefined}
-          key={monthAndYear}
           className={classNames.monthAndYear}
           onClick={onHeaderSelect}
           data-is-focusable={!!onHeaderSelect}
@@ -72,7 +70,9 @@ export const CalendarDayBase: React.FunctionComponent<ICalendarDayProps> = props
           onKeyDown={onButtonKeyDown(onHeaderSelect)}
           type="button"
         >
-          <span id={monthAndYearId}>{monthAndYear}</span>
+          <span id={monthAndYearId} aria-live="polite" aria-atomic="true">
+            {monthAndYear}
+          </span>
         </HeaderButtonComponentType>
         <CalendarDayNavigationButtons {...props} classNames={classNames} />
       </div>
@@ -100,7 +100,7 @@ interface ICalendarDayNavigationButtonsProps extends ICalendarDayProps {
   classNames: IProcessedStyleSet<ICalendarDayStyles>;
 }
 
-const CalendarDayNavigationButtons = (props: ICalendarDayNavigationButtonsProps): JSX.Element => {
+const CalendarDayNavigationButtons = (props: ICalendarDayNavigationButtonsProps): JSXElement => {
   const {
     minDate,
     maxDate,
@@ -183,15 +183,13 @@ const CalendarDayNavigationButtons = (props: ICalendarDayNavigationButtonsProps)
 };
 CalendarDayNavigationButtons.displayName = 'CalendarDayNavigationButtons';
 
-const onButtonKeyDown = (
-  callback?: () => void,
-): ((ev: React.KeyboardEvent<HTMLButtonElement | HTMLDivElement>) => void) => (
-  ev: React.KeyboardEvent<HTMLButtonElement>,
-) => {
-  // eslint-disable-next-line deprecation/deprecation
-  switch (ev.which) {
-    case KeyCodes.enter:
-      callback?.();
-      break;
-  }
-};
+const onButtonKeyDown =
+  (callback?: () => void): ((ev: React.KeyboardEvent<HTMLButtonElement | HTMLDivElement>) => void) =>
+  (ev: React.KeyboardEvent<HTMLButtonElement>) => {
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    switch (ev.which) {
+      case KeyCodes.enter:
+        callback?.();
+        break;
+    }
+  };

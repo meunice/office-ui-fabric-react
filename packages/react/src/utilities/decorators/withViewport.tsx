@@ -2,6 +2,8 @@ import * as React from 'react';
 import { BaseDecorator } from './BaseDecorator';
 import { findScrollableParent, getRect, getWindow, Async, EventGroup } from '../../Utilities';
 
+import type { JSXElement } from '@fluentui/utilities';
+
 /**
  * Viewport rectangle dimensions.
  *
@@ -71,7 +73,7 @@ const MAX_RESIZE_ATTEMPTS = 3;
 /**
  * A decorator to update decorated component on viewport or window resize events.
  *
- * @param ComposedComponent decorated React component reference.
+ * @param ComposedComponent - decorated React component reference.
  */
 export function withViewport<TProps extends { viewport?: IViewport }, TState>(
   ComposedComponent: new (props: TProps, ...args: any[]) => React.Component<TProps, TState>,
@@ -152,7 +154,7 @@ export function withViewport<TProps extends { viewport?: IViewport }, TState>(
       this._unregisterResizeObserver();
     }
 
-    public render(): JSX.Element {
+    public render(): JSXElement {
       const { viewport } = this.state;
       const newViewport = viewport!.width > 0 && viewport!.height > 0 ? viewport : undefined;
 
@@ -195,9 +197,10 @@ export function withViewport<TProps extends { viewport?: IViewport }, TState>(
     private _updateViewport = (withForceUpdate?: boolean) => {
       const { viewport } = this.state;
       const viewportElement = this._root.current;
+      const win = getWindow(viewportElement);
       const scrollElement = findScrollableParent(viewportElement) as HTMLElement;
-      const scrollRect = getRect(scrollElement);
-      const clientRect = getRect(viewportElement);
+      const scrollRect = getRect(scrollElement, win);
+      const clientRect = getRect(viewportElement, win);
       const updateComponent = () => {
         if (withForceUpdate && this._composedComponentInstance) {
           this._composedComponentInstance.forceUpdate();

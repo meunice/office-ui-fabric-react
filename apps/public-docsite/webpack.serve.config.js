@@ -3,8 +3,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const resources = require('../../scripts/webpack/webpack-resources');
-const getResolveAlias = require('../../scripts/webpack/getResolveAlias');
+const { getResolveAlias, resources } = require('@fluentui/scripts-webpack');
 const { addMonacoWebpackConfig } = require('@fluentui/react-monaco-editor/scripts/addMonacoWebpackConfig');
 const { getLoadSiteConfig } = require('@fluentui/public-docsite-setup/scripts/getLoadSiteConfig');
 
@@ -13,7 +12,8 @@ const { getLoadSiteConfig } = require('@fluentui/public-docsite-setup/scripts/ge
 /** @type {typeof import('@fluentui/public-docsite-setup').BUNDLE_NAME} */
 const entryPointName = 'fabric-site';
 
-const outDir = 'dist';
+const outDirName = 'dist';
+const outDir = path.join(__dirname, outDirName);
 
 /** @type {webpack.Configuration[]} */
 module.exports = [
@@ -21,7 +21,7 @@ module.exports = [
   {
     ...getLoadSiteConfig({
       libraryPath: path.dirname(require.resolve('@fluentui/react/package.json')),
-      outDir: path.join(__dirname, outDir),
+      outDir,
       isProduction: false,
       CopyWebpackPlugin,
       webpack,
@@ -31,31 +31,46 @@ module.exports = [
     // devServer: {
     //   host: 'localhost',
     //   port: 4322,
-    //   static: path.join(__dirname, outDir),
+    //   static: outDir,
     // },
   },
   // Rest of site (comment out if serving previously built files)
   resources.createServeConfig(
-    addMonacoWebpackConfig({
-      entry: {
-        [entryPointName]: ['react-app-polyfill/ie11', './src/root.tsx'],
-      },
+    addMonacoWebpackConfig(
+      {
+        entry: {
+          [entryPointName]: ['react-app-polyfill/ie11', './src/root.tsx'],
+        },
 
-      output: {
-        chunkFilename: `${entryPointName}-[name].js`,
-      },
+        output: {
+          chunkFilename: `${entryPointName}-[name].js`,
+        },
 
-      // The website config intentionally doesn't have React as an external because we bundle it
-      // to ensure we get a consistent version.
+        // The website config intentionally doesn't have React as an external because we bundle it
+        // to ensure we get a consistent version.
 
-      optimization: {
-        removeAvailableModules: false,
-      },
+        optimization: {
+          removeAvailableModules: false,
+        },
 
-      resolve: {
-        alias: getResolveAlias(),
+        resolve: {
+          alias: {
+            ...getResolveAlias(),
+            // public-docsite-resources exposes api reference JSON under dist/api that is consumed via
+            // require.context; its package exports field cannot map a directory, so alias to the real
+            // directory to resolve it.
+            '@fluentui/public-docsite-resources/dist/api': path.resolve(
+              __dirname,
+              '../public-docsite-resources/dist/api',
+            ),
+            // react-monaco-editor dynamically loads @types/react via proprietary webpack require.ensure,
+            // this doesn't work starting @types/react@17.0.48 as the types package introduced Export Maps
+            '@types/react/index.d.ts': path.resolve(__dirname, '../../node_modules/@types/react/index.d.ts'),
+          },
+        },
       },
-    }),
-    outDir,
+      { outDir },
+    ),
+    outDirName,
   ),
 ];

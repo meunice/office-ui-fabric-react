@@ -10,6 +10,7 @@ import { FocusZoneDirection } from '@fluentui/react/lib/FocusZone';
 import { mergeStyleSets } from '@fluentui/react/lib/Styling';
 import { css } from '@fluentui/react/lib/Utilities';
 import { useConst } from '@fluentui/react-hooks';
+import type { JSXElement } from '@fluentui/utilities';
 
 export const ContextualMenuCustomizationExample: React.FunctionComponent = () => {
   const menuProps = useConst<IContextualMenuProps>(() => ({
@@ -23,7 +24,6 @@ export const ContextualMenuCustomizationExample: React.FunctionComponent = () =>
       {
         key: 'charm',
         text: 'Charm',
-        ariaLabel: 'Charm. Press enter, space or right arrow keys to open submenu.',
         subMenuProps: {
           focusZoneProps: { direction: FocusZoneDirection.bidirectional },
           items: [
@@ -48,7 +48,6 @@ export const ContextualMenuCustomizationExample: React.FunctionComponent = () =>
       {
         key: 'categories',
         text: 'Categorize',
-        ariaLabel: 'Categorize. Press enter, space or right arrow keys to open submenu.',
         subMenuProps: {
           items: [
             {
@@ -76,7 +75,7 @@ export const ContextualMenuCustomizationExample: React.FunctionComponent = () =>
   return <DefaultButton text="Click for ContextualMenu" menuProps={menuProps} />;
 };
 
-function renderCharmMenuItem(item: IContextualMenuItem, dismissMenu: () => void): JSX.Element {
+function renderCharmMenuItem(item: IContextualMenuItem, dismissMenu: () => void): JSXElement {
   return (
     <IconButton
       iconProps={{ iconName: item.text }}
@@ -87,7 +86,7 @@ function renderCharmMenuItem(item: IContextualMenuItem, dismissMenu: () => void)
   );
 }
 
-function renderCategoriesList(item: IContextualMenuItem): JSX.Element {
+function renderCategoriesList(item: IContextualMenuItem): JSXElement {
   return (
     <ul className={classNames.categoriesList}>
       <li className="ms-ContextualMenu-item">

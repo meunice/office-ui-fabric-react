@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AppThemesContext } from '../../utilities/theme';
-import { classNamesFunction, css, styled, ThemeProvider } from '@fluentui/react';
+import { classNamesFunction, css, on, styled, ThemeProvider } from '@fluentui/react';
 import { ExampleStatus, IAppProps, IAppStyleProps, IAppStyles } from './App.types';
 import { Fabric } from '@fluentui/react/lib/Fabric';
 import { getStyles } from './App.styles';
@@ -11,6 +11,7 @@ import { Panel, PanelType } from '@fluentui/react/lib/Panel';
 import { ResponsiveMode, withResponsiveMode } from '@fluentui/react/lib/ResponsiveMode';
 import { showOnlyExamples } from '../../utilities/showOnlyExamples';
 import { getQueryParam } from '../../utilities/index2';
+import { getNormalizedPath, normalizePath } from '../../utilities/getNormalizedPath';
 
 export interface IAppState {
   isMenuVisible: boolean;
@@ -21,24 +22,39 @@ export interface IAppState {
 const getClassNames = classNamesFunction<IAppStyleProps, IAppStyles>();
 
 @withResponsiveMode
-export class AppBase extends React.Component<IAppProps, IAppState> {
+export class AppBase extends React.Component<React.PropsWithChildren<IAppProps>, IAppState> {
   public state: IAppState = { isMenuVisible: false, isMenuClosing: false };
   private _classNames: IProcessedStyleSet<IAppStyles>;
   private _showOnlyExamples: boolean;
   private _isStrict: boolean;
+  private _disposables: Function[];
+  private _appTitle: string;
+  private _prevPath: string;
 
   constructor(props: IAppProps) {
     super(props);
 
     this._showOnlyExamples = showOnlyExamples();
     this._isStrict = getQueryParam('strict') === 'all';
+    this._disposables = [];
+    this._appTitle = this.props.appDefinition.appTitle.replace(' - ', ' ') + ' Examples';
   }
 
-  public componentDidMount() {
-    document.title = this.props.appDefinition.appTitle.replace(' - ', ' ') + ' Examples';
+  public componentDidMount(): void {
+    this._setDocumentTitle();
+
+    this._disposables.push(
+      on(window, 'hashchange', () => {
+        this._setDocumentTitle();
+      }),
+    );
   }
 
-  public render(): JSX.Element {
+  public componentWillUnmount(): void {
+    this._disposables.forEach(dispose => dispose());
+  }
+
+  public render(): React.ReactElement {
     const { appDefinition, styles, responsiveMode = ResponsiveMode.xLarge, theme } = this.props;
     const { themes } = appDefinition;
     const { isMenuVisible } = this.state;
@@ -134,7 +150,7 @@ export class AppBase extends React.Component<IAppProps, IAppState> {
     this.setState(prevState => (prevState.isMenuClosing ? null : { isMenuVisible }));
   };
 
-  private _onRenderLink = (link: INavLink): JSX.Element => {
+  private _onRenderLink = (link: INavLink): React.ReactElement => {
     const classNames = this._classNames;
 
     // Nav-linkText is a class name from the Fabric nav
@@ -159,6 +175,40 @@ export class AppBase extends React.Component<IAppProps, IAppState> {
       </>
     );
   };
+
+  private _setDocumentTitle() {
+    const path = getNormalizedPath();
+    if (path === this._prevPath) {
+      return; // don't update on anchor or query changes
+    }
+
+    this._prevPath = path;
+    const {
+      appDefinition: { examplePages, testPages },
+    } = this.props;
+    const pages = [...examplePages, ...testPages];
+
+    let matchingLink: INavLink | undefined;
+    for (const page of pages) {
+      matchingLink = _findMatchingLink(page.links || [], path);
+      if (matchingLink) {
+        break;
+      }
+    }
+    document.title = matchingLink?.name ? `${this._appTitle} - ${matchingLink.name}` : this._appTitle;
+  }
+}
+
+function _findMatchingLink(links: INavLink[], path: string): INavLink | undefined {
+  for (const link of links) {
+    if (normalizePath(link.url) === path) {
+      return link;
+    }
+    const matchingChildLink = _findMatchingLink(link.links || [], path);
+    if (matchingChildLink) {
+      return matchingChildLink;
+    }
+  }
 }
 
 export const App: React.FunctionComponent<IAppProps> = styled<IAppProps, IAppStyleProps, IAppStyles>(

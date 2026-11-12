@@ -10,32 +10,40 @@ import {
 import { IColumn, IObjectWithKey, DetailsRow } from '@fluentui/react/lib/DetailsList';
 import { FocusZone } from '@fluentui/react/lib/FocusZone';
 import { Selection, SelectionMode, SelectionZone } from '@fluentui/react/lib/Selection';
-import { Toggle } from '@fluentui/react/lib/Toggle';
+import { Icon } from '@fluentui/react/lib/Icon';
 import { useConst } from '@fluentui/react-hooks';
 import { createListItems, createGroups, IExampleItem } from '@fluentui/example-data';
+import type { JSXElement } from '@fluentui/utilities';
 
 const groupCount = 3;
 const groupDepth = 1;
 
 const groupProps: IGroupRenderProps = {
-  onRenderHeader: (props?: IGroupHeaderProps): JSX.Element => (
+  onRenderHeader: (props?: IGroupHeaderProps): JSXElement => (
     <GroupHeader onRenderGroupHeaderCheckbox={onRenderGroupHeaderCheckbox} {...props} />
   ),
 };
 
-const onRenderGroupHeaderCheckbox = (props?: IGroupHeaderCheckboxProps) => (
-  <Toggle checked={props ? props.checked : undefined} />
-);
+/* This is rendered within a checkbox, so it must not be interactive itself. */
+const onRenderGroupHeaderCheckbox = (props?: IGroupHeaderCheckboxProps) => {
+  const iconStyles = { root: { fontSize: '36px' } };
+
+  return props?.checked ? (
+    <Icon iconName="ToggleRight" styles={iconStyles} />
+  ) : (
+    <Icon iconName="ToggleLeft" styles={iconStyles} />
+  );
+};
 
 export const GroupedListCustomCheckboxExample: React.FunctionComponent = () => {
-  const items: IObjectWithKey[] = useConst(() => createListItems(Math.pow(groupCount, groupDepth + 1)));
+  const items: IObjectWithKey[] = useConst(() => createListItems(groupCount ** (groupDepth + 1)));
   const groups = useConst(() => createGroups(groupCount, groupDepth, 0, groupCount));
   const columns = useConst(() =>
     Object.keys(items[0])
       .slice(0, 3)
       .map(
         (key: string): IColumn => ({
-          key: key,
+          key,
           name: key,
           fieldName: key,
           minWidth: 300,
